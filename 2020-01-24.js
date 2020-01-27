@@ -2,18 +2,18 @@ const SIZE = 800
 const divs = 2
 const colors = ['#f6e1e1', '#ff9d76', '#eb4d55', '#333366']
 
-const setup = () => {
+setup = () => {
   createCanvas(SIZE, SIZE)
   frameRate(1)
   background(0)
 }
 
-const draw = () => {
+draw = () => {
   background(0)
   drawRect(0, 0, width / divs, height / divs)
 }
 
-const drawRect = (x, y, w, h) => {
+drawRect = (x, y, w, h) => {
   push()
   translate(x, y)
   for (let i = 0; i < divs; i++) {
