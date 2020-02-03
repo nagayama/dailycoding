@@ -5,5 +5,5 @@ cd ".."
 
 DATE=$(date +%F)
 
-touch "$DATE.js"
+cp template.html "$DATE.html"
 code -n .

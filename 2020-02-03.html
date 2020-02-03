@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="assets/style.css" />
+</head>
+
+<body>
+  <script>
+    let bodypix;
+    let vid;
+    let segmentation;
+    let fragments = []
+    let r = 300
+
+    const options = {
+      outputStride: 8, // 8, 16, or 32, default is 16
+      segmentationThreshold: 0.4 // 0 - 1, defaults to 0.5
+    }
+
+    function preload() {
+      vid = createVideo("assets/dance2.mp4");
+      vid.size(160, 120);
+      vid.loop()
+      vid.volume(0);
+      vid.hide()
+    }
+
+    function setup() {
+      createCanvas(800, 800)
+      background(255)
+      bodyPix = ml5.bodyPix(vid, options, modelReady)
+
+    }
+
+    function modelReady() {
+      bodyPix.segment(gotResults, options)
+    }
+
+
+    function gotResults(err, result) {
+      fragments.push(new Fragment(result))
+      if (fragments.length < 45) {
+        bodyPix.segment(vid, gotResults)
+      }
+    }
+
+    function draw() {
+      background(20)
+      fragments.forEach(fragment => fragment.draw())
+    }
+
+    class Fragment {
+      constructor(seg) {
+        this.seg = seg
+        this.angle = 0
+      }
+
+      draw() {
+        this.angle++
+        this.angle %= 360
+        const rad = radians((this.angle))
+        const x = Math.cos(rad - HALF_PI) * r
+        const y = Math.sin(rad - HALF_PI) * r / 3
+        const w = this.seg.backgroundMask.width
+        const h = this.seg.backgroundMask.height
+        push()
+        translate(width / 2, height / 2)
+        image(this.seg.backgroundMask, w / -2 + x, h / -2 + y, w, h)
+        pop()
+      }
+    }
+  </script>
+</body>
+
+</html>
