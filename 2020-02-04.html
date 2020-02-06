@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="assets/style.css" />
+</head>
+
+<body>
+  <script>
+    let bodypix;
+    let video;
+    let fragments = []
+    let img;
+    let r = 300
+
+    const options = {
+      outputStride: 8, // 8, 16, or 32, default is 16
+      segmentationThreshold: 0.7 // 0 - 1, defaults to 0.5
+    }
+
+    function preload() {
+      bodypix = ml5.bodyPix(options);
+    }
+
+    function setup() {
+      createCanvas(800, 800)
+      background(0)
+      // load up your video
+      video = createCapture(VIDEO);
+      video.size(160, 120);
+      video.volume(0);
+      video.hide()
+      setTimeout(() => {
+        bodypix.segment(video, gotResults)
+      }, 500)
+    }
+
+    function gotResults(err, result) {
+      if (err) {
+        return
+      }
+      fragments.push(new Fragment(result))
+      if(fragments.length > 20) {
+        fragments.shift()
+      }
+      setTimeout(() => {
+        bodypix.segment(video, gotResults)
+      }, 100)
+
+    }
+
+    function draw() {
+      background(0)
+      fragments.forEach(fragment => fragment.draw())
+    }
+
+    class Fragment {
+      constructor(seg) {
+        this.seg = seg
+        this.scale = 1
+      }
+
+      draw() {
+        this.scale += 0.1
+        const w = this.seg.backgroundMask.width
+        const h = this.seg.backgroundMask.height
+        push()
+        translate(width / 2, height / 2)
+        scale(this.scale)
+        image(this.seg.backgroundMask, w / -2 , h / -2, w, h)
+        pop()
+      }
+    }
+
+  </script>
+</body>
+
+</html>

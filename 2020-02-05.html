@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="assets/style.css" />
+</head>
+
+<body>
+  <script>
+    let i = 0
+    let leftX = 20
+    let topY = 20
+    let rectHeight = 100
+    let minWidth = 220
+    function setup() {
+      createCanvas(900, 740)
+      colorMode(HSB, 360, 100, 100, 1)
+      background(255)
+      noStroke()
+
+    }
+
+    function draw() {
+
+      fill(0, 0, 20, 0.2)
+      for (let i = 0; i < 20; i++) {
+        rect(leftX, topY, minWidth + 10 * i, rectHeight)
+      }
+
+      /*
+            translate(0, rectHeight + topY)
+            fill(0, 0, 20, 0.02)
+            for(let i=0;i<200;i++) {
+              rect(leftX, topY, minWidth + i, rectHeight)
+            }
+            */
+
+      push()
+      translate(0, rectHeight + topY)
+      fill(0, 0, 20, 0.2)
+      for (let i = 0; i < 20; i++) {
+        rect(leftX, topY, minWidth + random(0, 200), rectHeight)
+      }
+
+      translate(0, rectHeight + topY)
+      for (let i = 0; i < 20; i++) {
+        rect(leftX, topY, minWidth + Math.abs(randomGaussian(0, 100)), rectHeight)
+      }
+
+      translate(0, rectHeight + topY)
+      for (let i = 0; i < 20; i++) {
+        let topWidth = minWidth + Math.abs(randomGaussian(0, 100))
+        let bottomWidth = minWidth + Math.abs(randomGaussian(0, 100))
+        beginShape()
+        vertex(leftX, topY)
+        vertex(leftX + topWidth, topY)
+        vertex(leftX + bottomWidth, topY + rectHeight)
+        vertex(leftX, topY + rectHeight)
+        endShape(CLOSE);
+      }
+
+      translate(0, rectHeight + topY)
+      for (let i = 0; i < 20; i++) {
+
+        let topXExtend = Math.abs(randomGaussian(0, 100))
+        let topWidth = minWidth + topXExtend
+        let rightTopOffset = -1 * Math.abs(randomGaussian(0.1 * topXExtend, 1))
+
+        let bottomXExtend = Math.abs(randomGaussian(0, 100))
+        let bottomWidth = minWidth + bottomXExtend
+        let rightBottomOffset = Math.abs(randomGaussian(0.1 * bottomXExtend, 1))
+
+        beginShape()
+        vertex(leftX, topY)
+        vertex(leftX + minWidth, topY)
+        vertex(leftX + topWidth, topY + rightTopOffset)
+        vertex(leftX + bottomWidth, topY + rectHeight + rightBottomOffset)
+        vertex(leftX + minWidth, topY + rectHeight)
+        vertex(leftX, topY + rectHeight)
+        endShape(CLOSE);
+      }
+
+      translate(0, rectHeight + topY)
+      for (let i = 0; i < 20; i++) {
+
+        let topXExtend = Math.abs(randomGaussian(0, 10))
+        let topWidth = minWidth + topXExtend
+
+        let control1Width = minWidth + 40 + Math.abs(randomGaussian(0, 100))
+        let control2Width = minWidth + 40 + Math.abs(randomGaussian(0, 100))
+
+        let bottomXExtend = Math.abs(randomGaussian(0, 10))
+        let bottomWidth = minWidth + bottomXExtend
+
+        beginShape()
+        vertex(leftX, topY)
+        vertex(leftX + topWidth, topY)
+
+        bezierVertex(
+          leftX + control1Width, topY + rectHeight * 0.333,
+          leftX + control2Width, topY + rectHeight * 0.666,
+          leftX + bottomWidth, topY + rectHeight
+        )
+
+        vertex(leftX, topY + rectHeight)
+        endShape(CLOSE);
+      }
+      pop()
+
+      translate(width / 2 - leftX, 0)
+      fill(0, 0, 20, 1)
+      rect(leftX, topY, minWidth, rectHeight)
+
+      for (let i = 0; i < 20000; i++) {
+        const x = minWidth + absGauss(0, 50)
+        const y = random(topY, topY + rectHeight - 2)
+        rect(x, y, 2, 2)
+      }
+
+      translate(0, rectHeight + topY)
+      fill(0, 0, 20, 1)
+      rect(leftX, topY, minWidth, rectHeight)
+
+      strokeWeight(0.1)
+      stroke(0, 0, 20, 1)
+      for (let i = 0; i < 5000; i++) {
+        const startX = leftX + minWidth
+        const endX = leftX + minWidth + absGauss(0, 60)
+        const y = random(topY, topY + rectHeight)
+        line(startX, y, endX, y)
+      }
+
+
+      translate(0, rectHeight + topY)
+      fill(0, 0, 20, 1)
+      rect(leftX, topY, minWidth, rectHeight)
+
+      strokeWeight(0.1)
+      stroke(0, 0, 20, 1)
+      for (let i = 0; i < 1000; i++) {
+        const x = leftX + minWidth + absGauss(0, 60)
+        const y = topY + rectHeight
+        line(x, topY, x, y)
+      }
+
+      translate(0, rectHeight + topY)
+      fill(0, 0, 20, 1)
+      rect(leftX, topY, minWidth, rectHeight)
+
+      strokeWeight(0.1)
+      stroke(0, 0, 20, 1)
+      for (let i = 0; i < 10000; i++) {
+        const topX = leftX + minWidth
+        const bottomX = leftX + minWidth + absGauss(0, 50)
+        const bottomY = topY + rectHeight
+        line(topX, random(topY, bottomY), bottomX, random(topY, bottomY))
+      }
+
+
+      translate(0, rectHeight + topY)
+      fill(0, 0, 20, 1)
+      rect(leftX, topY, minWidth, rectHeight)
+
+      strokeWeight(0.1)
+      stroke(0, 0, 20, 1)
+      for (let i = 0; i < 500; i++) {
+        const topX = leftX + minWidth + gauss(0, 60)
+        const bottomX = leftX + minWidth + gauss(0, 60)
+        const bottomY = topY + rectHeight
+        const meanStartY = random(topY, bottomY)
+        const meanFinishY = random(topY, bottomY)
+        for (let j = 0; j < 20; j++)
+          line(gauss(topX, 4), gauss(meanStartY, 4), gauss(bottomX, 4), gauss(meanFinishY, 4))
+      }
+      noLoop()
+    }
+
+    function gauss(mn, sd) {
+      return randomGaussian(mn, sd)
+    }
+    function absGauss(mn, sd) {
+      return Math.abs(gauss(mn, sd))
+    }
+
+
+  </script>
+</body>
+
+</html>

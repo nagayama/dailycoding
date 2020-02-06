@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="assets/style.css" />
+</head>
+
+<body>
+  <script>
+    const inc = 0.1
+    const scl = 20
+    let cols, rows
+    let zoff = 0
+
+    function setup() {
+      createCanvas(W = 600, W)
+      cols = floor(width / scl)
+      rows = floor(height / scl)
+    }
+
+    function draw() {
+      randomSeed(0)
+      background(0)
+      let yoff = 0
+      loadPixels()
+      for (let y = 0; y < rows; y++) {
+        let xoff = 0
+        for (let x = 0; x < cols; x++) {
+          const angle = noise(xoff, yoff, zoff) * TWO_PI
+          const v = p5.Vector.fromAngle(angle)
+          xoff += inc
+          stroke(0)
+          push()
+          translate(x * scl, y * scl)
+          rotate(v.heading())
+          stroke(255)
+          line(0, 0, scl - 5, 0)
+          noStroke()
+          circle(0, 0, 3)
+          pop()
+        }
+        yoff += inc
+      }
+      zoff += 0.01
+    }
+  </script>
+</body>
+
+</html>
