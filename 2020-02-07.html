@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="assets/style.css" />
+</head>
+
+<body>
+  <script>
+    const inc = 0.1
+    const scl = 20
+    let cols, rows
+    let zoff = 0
+    const particles = []
+    let flowfield
+
+    function setup() {
+      createCanvas(W = 600, W)
+      cols = floor(width / scl)
+      rows = floor(height / scl)
+      flowfield = new Array(cols * rows)
+      for (let i = 0; i < 2000; i++) {
+        particles[i] = new Particle()
+      }
+      background(0)
+    }
+
+    function draw() {
+      randomSeed(0)
+      let yoff = 0
+      for (let y = 0; y < rows; y++) {
+        let xoff = 0
+        for (let x = 0; x < cols; x++) {
+          const index = x + y * cols
+          const angle = noise(xoff, yoff, zoff) * TWO_PI * 4
+          const v = p5.Vector.fromAngle(angle)
+          v.setMag(0.5)
+          flowfield[index] = v
+          xoff += inc
+          stroke(0)
+          //push()
+          //translate(x * scl, y * scl)
+          //rotate(v.heading())
+          //stroke(255, 100)
+          //line(0, 0, scl, 0)
+          //noStroke()
+          //circle(0, 0, 3)
+          //pop()
+        }
+        yoff += inc
+        zoff += 0.0001
+      }
+
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].follow(flowfield)
+        particles[i].update()
+        particles[i].show()
+        particles[i].edges()
+        particles[i].updatePrev()
+      }
+    }
+
+
+    class Particle {
+      constructor() {
+        this.pos = createVector(random(width), random(height))
+        this.vel = createVector(0, 0)
+        this.acc = createVector(0, 0)
+        this.maxspeed = 4
+        this.prevPos = this.pos.copy()
+      }
+
+      update() {
+        this.vel.add(this.acc)
+        this.vel.limit(this.maxspeed)
+        this.pos.add(this.vel)
+        this.acc.mult(0)
+      }
+
+      updatePrev() {
+        this.prevPos.x = this.pos.x
+        this.prevPos.y = this.pos.y
+
+      }
+
+      applyForce(force) {
+        this.acc.add(force)
+      }
+
+      show() {
+        stroke(255, 10)
+        strokeCap(SQUARE);
+        strokeWeight(0.5)
+        line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y)
+      }
+
+      edges() {
+        if (this.pos.x > width) this.pos.x = 0
+        if (this.pos.x < 0) this.pos.x = width
+        if (this.pos.y > height) this.pos.y = 0
+        if (this.pos.y < 0) this.pos.y = height
+      }
+
+      follow(vectors) {
+        const x = floor(this.pos.x / scl)
+        const y = floor(this.pos.y / scl)
+        const index = x + y * cols
+        const force = vectors[index]
+        this.applyForce(force)
+      }
+
+    }
+  </script>
+</body>
+
+</html>
