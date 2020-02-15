@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <script>
+    let ammount = 100
+    let dots = []
+    let bgColor = 0
+    let keyColor = 255
+    let bgColor2 = 255
+    let keyColor2 = 0
+
+    function setup() {
+      createCanvas(windowWidth, windowHeight)
+      background(0)
+      strokeWeight(1);
+      strokeCap(SQUARE);
+      for (let i = 0; i < ammount; i++) {
+        dots.push(new Dot(dots.length))
+      }
+    }
+
+    function draw() {
+      if(frameCount % 180 === 0) {
+        bgColor2 = bgColor2 === 255 ? 0 : 255
+        keyColor2 = keyColor2 === 255 ? 0 : 255
+      }
+      bgColor += (bgColor2 - bgColor) / 20
+      keyColor += (keyColor2 - keyColor) / 20
+
+      background(bgColor)
+      dots.forEach(l => l.update())
+    }
+
+    class Dot {
+
+      constructor(id) {
+        this.id = id
+        this.position = createVector(random(width), random(height))
+        this.velocity = createVector(random(-1, 1), random(-1, 1))
+        this.r = random(1,4)
+      }
+
+      update() {
+        this.move()
+        this.draw()
+        this.connect()
+        this.edge()
+      }
+
+      move() {
+        this.position.add(this.velocity)
+      }
+
+      draw() {
+        stroke(keyColor)
+        line(this.position.x-this.r,this.position.y,this.position.x+this.r,this.position.y)
+        line(this.position.x,this.position.y-this.r,this.position.x,this.position.y+this.r)
+      }
+
+      connect(){
+        const threshold = 70
+        for (let i = this.id + 1; i < dots.length; i++) {
+          const other = dots[i]
+          const dist = other.position.dist(this.position)
+          const alpha = map(dist,0,threshold,255,0)
+          stroke(0,alpha)
+          if (dist < threshold && keyColor<100) {
+            line(this.position.x,this.position.y,other.position.x,other.position.y)
+          }
+        }
+      }
+
+      edge() {
+        if (this.position.x < 0) {
+          this.velocity.x *= -1
+        }
+        if (this.position.x > width) {
+          this.velocity.x *= -1
+        }
+        if (this.position.y < 0) {
+          this.velocity.y *= -1
+        }
+        if (this.position.y > height) {
+          this.velocity.y *= -1
+        }
+      }
+
+    }
+
+  </script>
+</body>
+
+</html>

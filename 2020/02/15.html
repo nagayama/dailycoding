@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #fff;">
+  <script>
+    let poseNet
+    let pose
+    let scl2 = 1
+    let angle2 = 0
+
+    function setup() {
+      createCanvas(640, 480)
+      background(0)
+      video = createCapture(VIDEO);
+      video.volume(0);
+      video.hide()
+      poseNet = ml5.poseNet(video)
+      poseNet.on('pose', gotPoses)
+      frameRate(30)
+    }
+
+    function gotPoses(poses) {
+      if (poses.length > 0) {
+        pose = poses[0].pose
+      }
+    }
+
+    function draw() {
+      background(0, 10)
+      if (pose && pose.nose.confidence > 0.8) {
+        const angle = Math.atan2(pose.rightEye.x - pose.leftEye.x, pose.rightEye.y - pose.leftEye.y)
+        const eyeDist = dist(pose.rightEye.x, pose.rightEye.x, pose.leftEye.x, pose.leftEye.x)
+        const scl = 50 / eyeDist
+        scl2 += (scl - scl2) / 2
+        angle2 += (angle - angle2) / 2
+        rectMode(CENTER)
+        imageMode(CENTER)
+        translate(width / 2 + (width / 2 - pose.nose.x) * scl2, height / 2 + (height / 2 - pose.nose.y) * scl2)
+        rotate(angle2 + PI / 2)
+        scale(scl2)
+        image(video, 0, 0)
+      }
+    }
+
+  </script>
+</body>
+
+</html>
