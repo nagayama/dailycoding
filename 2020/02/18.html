@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body>
+  <script>
+    let W = 800
+    let images = []
+    let bars = []
+    let y = 0
+    let yv = -1
+    let totalHeight = 0
+    let perseptionRadius = 100
+    let sepRate = 0
+    let colors = ['#2BC7E9', '#FFDD4B', '#FF3BDE']
+
+    const flock = []
+    function setup() {
+      createCanvas(W, W)
+
+      for (let i = 0; i < 100; i++) {
+        flock.push(new Boid())
+      }
+    }
+
+    function draw() {
+      blendMode(BLEND)
+      background(255)
+      blendMode(MULTIPLY)
+      if(frameCount % 180 == 0) {
+        sepRate = sepRate == 0 ? 10 : 0
+      }
+      for (let boid of flock) {
+        boid.edges()
+        boid.update()
+        boid.flock(flock)
+        boid.draw()
+      }
+    }
+
+    class Boid {
+      constructor() {
+        this.position = createVector(random(0, width), random(0,height))
+        this.velocity = p5.Vector.random2D()
+        this.velocity.setMag(random(2,4))
+        this.acceleration = createVector()
+        this.maxForce = 2
+        this.maxSpeed = 7
+        this.color = random(colors)
+      }
+
+
+      flock(boids) {
+        let avg = createVector()
+        let con = createVector();
+        let sep = createVector()
+        let total = 0
+
+        for (let other of boids) {
+          let d = dist(
+            this.position.x,
+            this.position.y,
+            other.position.x,
+            other.position.y
+          )
+          if (other != this && d < perseptionRadius) {
+              const diff = p5.Vector.sub(this.position, other.position)
+              diff.div(d)
+              sep.add(diff)
+
+              con.add(other.position);
+
+              avg.add(other.velocity)
+            total++
+          }
+        }
+
+        if (total > 0) {
+          avg.div(total)
+          avg.setMag(this.maxSpeed)
+          avg.sub(this.velocity)
+          avg.limit(this.maxForce)
+
+          sep.div(total);
+          sep.setMag(this.maxSpeed);
+          sep.sub(this.velocity);
+          sep.limit(this.maxForce);
+
+          con.div(total);
+          con.sub(this.position);
+          con.setMag(this.maxSpeed);
+          con.sub(this.velocity);
+          con.limit(this.maxForce);
+
+        }
+
+        sep.mult(sepRate);
+        con.mult(0.1)
+        avg.mult(0.1)
+
+        this.acceleration.add(sep)
+        this.acceleration.add(con)
+        this.acceleration.add(avg)
+      }
+
+      edges() {
+        if(this.position.x > width) {
+          this.position.x =0
+        } else if(this.position.x < 0) {
+          this.position.x = width
+        }
+        if(this.position.y > height) {
+          this.position.y =0
+        } else if(this.position.y < 0) {
+          this.position.y = height
+        }
+      }
+
+      update() {
+        this.position.add(this.velocity)
+        this.velocity.add(this.acceleration)
+        this.velocity.limit(this.maxSpeed)
+      }
+
+      draw() {
+        strokeWeight(30)
+        stroke(this.color)
+        point(this.position.x, this.position.y)
+      }
+
+    }
+
+
+  </script>
+</body>
+
+</html>

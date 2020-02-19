@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body>
+  <script>
+    let W = 800
+    let images = []
+    let bars = []
+    let y = 0
+    let yv = -1
+    let totalHeight = 0
+
+
+    function preload() {
+      images.push(loadImage('/assets/kakuteishinkoku/1.svg'))
+      images.push(loadImage('/assets/kakuteishinkoku/2.svg'))
+      images.push(loadImage('/assets/kakuteishinkoku/3.svg'))
+      images.push(loadImage('/assets/kakuteishinkoku/4.svg'))
+    }
+
+    function setup() {
+      createCanvas(W, W);
+      background(255)
+      push()
+      while (totalHeight < height * 1.5) {
+        const bar = new HBar(totalHeight)
+        bars.push(bar)
+        totalHeight += bar.size
+      }
+    }
+
+    function draw() {
+      background(255)
+      let h = 0
+      yv = noise(frameCount / 100) * 20 - 10
+      for (let i = 0; i < bars.length; i++) {
+        bars[i].update(yv)
+      }
+    }
+
+    class HBar {
+
+      constructor(y) {
+        this.size = Math.abs(randomGaussian(W / 10, 100) + W / 10)
+        this.rows = W / this.size + 1
+        this.direction = random(100) > 50 ? -1 : 1
+        this.position = createVector(0, 0)
+        this.x = 0
+        this.y = y
+        this.v = random(3, 6) * this.direction
+        this.image = images[bars.length % images.length]
+        this.xoff = 0
+      }
+
+      update(yv) {
+        this.y += yv
+        this.xoff += 0.001
+
+        this.v = noise(this.xoff, this.y / 300) * 10 * this.direction
+        this.x += this.v
+
+        if (this.x > 0) {
+          this.x -= this.size
+        }
+        if (this.x < -this.size) {
+          this.x += this.size
+        }
+
+        if (this.y > height) {
+          this.y -= totalHeight
+        }
+        if (this.y < -this.size) {
+          this.y += totalHeight
+        }
+
+        for (let i = 0; i < this.rows; i++) {
+          image(this.image, this.x + i * this.size, this.y, this.size, this.size)
+        }
+
+      }
+
+    }
+
+  </script>
+</body>
+
+</html>
