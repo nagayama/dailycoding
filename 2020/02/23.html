@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body>
+  <script>
+    const colorUrl = "https://coolors.co/447fb4-5696ce-6bb2ef-7fc3ff-171738"
+    const colors = colorUrl.match(/[a-f0-9]{6}/g).map(c => "#" + c)
+    const rects = []
+    const W = 600
+    const N = 9
+    const S = W / (N-2)
+
+    function setup() {
+      createCanvas(W, W)
+      for (let i = 0; i < N * (N+2); i++) {
+        rects.push(new Rectangle())
+      }
+    }
+
+    function draw() {
+      background(255)
+      translate(-S,-S)
+      rects.forEach(r => r.draw())
+    }
+
+    class Rectangle {
+      constructor() {
+        this.id = rects.length
+        this.col = this.id % N
+        this.row = floor(this.id / N)
+        this.x = this.col * S
+        this.y = this.row * S
+        this.x2 = this.x
+        this.y2 = this.y
+        this.mode = 0
+        this.color = colors[this.id%4]
+      }
+
+      draw() {
+
+        if (frameCount % 30 == 0) {
+          switch (this.mode) {
+            case 0:
+              this.x2 +=  this.row % 2 == 0 ? S : -S
+              break;
+            case 1:
+              this.y2 +=  this.col % 2 == 0 ? S : -S
+              break;
+            case 2:
+              this.x2 +=  this.row % 2 == 0 ? -S : S
+              break;
+            case 3:
+              this.y2 +=  this.col % 2 == 0 ? -S : S
+              break;
+          }
+          this.mode++
+          this.mode %= 4
+        }
+
+        this.x += (this.x2 - this.x) / 3
+        this.y += (this.y2 - this.y) / 3
+        push()
+        noStroke()
+        fill(this.color)
+        rect(this.x, this.y, S, S)
+        text(this.mode, this.x, this.y+10)
+        pop()
+      }
+    }
+
+  </script>
+</body>
+
+</html>

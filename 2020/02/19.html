@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body>
+  <script>
+    const rows = cols = 3
+    const boxes = []
+
+    function setup() {
+      createCanvas(600, 600, WEBGL);
+      for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
+          boxes.push(new Box(i, j))
+        }
+      }
+      //colorMode(HSB, 360, 100, 100, 100)
+      //debugMode();
+      ortho(-width / 2, width / 2, height / 2, -height / 2, 0, 1000);
+
+    }
+    function draw() {
+      background(211, 9, 100);
+      ambientLight(211, 9, 90);
+      directionalLight(200, 200, 200, 0, 0, -100)
+      //pointLight(100, 100, 100, 0, 0, 300);
+      //orbitControl();
+
+      boxes.forEach(box => box.draw())
+    }
+
+    class Box {
+      constructor(col, row) {
+        this.id = boxes.length
+        this.col = col
+        this.row = row
+        this.w = this.w2 = random(10, 30)
+        this.h = this.h2 = random(10, 30)
+        this.offsetX = random(-1, 1)
+        this.offsetZ = random(-1, 1)
+      }
+
+      draw() {
+        if (frameCount % (60) === 0) {
+          this.w2 = random(10, 30)
+          this.h2 = random(3, 30)
+        }
+
+        this.w += (this.w2 - this.w) / 5
+        this.h += (this.h2 - this.h) / 5
+        push()
+        noStroke()
+        translate(
+          this.col * width / cols - width / 2 + width / cols / 2,
+          this.row * height / rows - height / 2 + height / rows / 2,
+        )
+        rotateY(frameCount / 100)
+        rotateX(this.offsetX)
+        rotateZ(this.offsetZ)
+        torus(this.w, this.h, 8, 6)
+        pop()
+      }
+
+    }
+
+  </script>
+</body>
+
+</html>

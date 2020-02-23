@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body>
+  <script>
+    const images = []
+    const boxes = []
+    let bg
+
+    function preload() {
+      images.push(loadImage('/assets/kakuteishinkoku/1.png'))
+      images.push(loadImage('/assets/kakuteishinkoku/2.png'))
+      images.push(loadImage('/assets/kakuteishinkoku/3.png'))
+      images.push(loadImage('/assets/kakuteishinkoku/4.png'))
+
+      bg = loadImage('/assets/kakuteishinkoku/space.jpg')
+
+    }
+
+    function setup() {
+      createCanvas(600, 600, WEBGL)
+      images.forEach(image => {
+        boxes.push(new Box(image))
+      })
+    }
+
+    function draw() {
+      background(0)
+      //image(bg,-width/2,-width/2)
+      push()
+      noStroke()
+      texture(bg)
+      translate(0,0,-width)
+      plane(width*3, height*3)
+      pop()
+      //sphere(width*3)
+      boxes.forEach(box => box.draw())
+
+    }
+
+
+    class Box {
+      constructor(image) {
+        this.texture = image
+        this.id = boxes.length
+        this.size = width / 2
+        this.offX = 0
+        this.offY = 0
+        this.offZ = 0
+        this.xv = random(-1, 1) / 10
+        this.yv = random(-1, 1) / 10
+        console.log(this.xv)
+      }
+
+      draw() {
+
+        if (frameCount > 60) {
+
+          this.offX += this.xv
+          this.offY += this.yv
+        }
+
+        push()
+        translate(this.size * (this.id % 2) - width / 4, this.size * floor(this.id / 2) - width / 4)
+        texture(this.texture)
+        rotateX(radians(this.offX))
+        rotateY(radians(this.offY))
+        plane(this.size, this.size, 2)
+        pop()
+      }
+
+    }
+
+
+
+
+  </script>
+</body>
+
+</html>

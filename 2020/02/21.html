@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body>
+  <script>
+    let waves = []
+    let msk
+    function setup() {
+      createCanvas(600, 600)
+      for (let i = 0; i < 3; i++) {
+        waves.push(new Wave())
+      }
+      msk = createGraphics(width,height)
+    }
+
+    function draw() {
+      background(255)
+      msk.background(0)
+      msk.erase()
+      msk.circle(width/2,height/2,300)
+      blendMode(MULTIPLY)
+      waves.forEach(w => w.draw())
+      blendMode(BLEND)
+      image(msk,0,0)
+      //erase()
+      //circle(width/2,height/2,100)
+    }
+
+    class Wave {
+
+      constructor(col, row) {
+        this.num = 1
+        this.w = width / this.num
+        this.id = waves.length
+        this.g = createGraphics(width,height)
+        this.color = color(['#2BC7E9', '#FFDD4B', '#FF3BDE'][this.id])
+      }
+
+      draw() {
+        this.g.clear()
+        this.g.noStroke()
+        this.g.fill(this.color)
+        this.g.beginShape()
+        this.g.curveVertex(-width, height);
+        for (let i = 0; i <= this.num; i++) {
+          const n = noise(this.w*i/200,frameCount/500, this.id) * 200
+          this.g.curveVertex(this.w*i,n + height*0.4)
+        }
+        this.g.curveVertex(width*2, height);
+        this.g.endShape(CLOSE)
+
+        image(this.g,0,0)
+      }
+
+    }
+
+  </script>
+</body>
+
+</html>
