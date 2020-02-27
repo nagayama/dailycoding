@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body>
+  <script>
+    const colorUrl = "https://coolors.co/00b3b3-b500b5-b5b500-b5b5b5-171738"
+    const colors = colorUrl.match(/[a-f0-9]{6}/g).map(c => "#" + c)
+
+    const W = 600
+    let shapes = []
+    const col = 2
+    const size = W / col
+    let globalID = 0
+
+    function setup() {
+      createCanvas(W, W)
+      for (let i = 0; i < 3; i++) {
+        shapes.push(new Shape(0, 0, size))
+      }
+    }
+
+    function draw() {
+      blendMode(BLEND)
+      background(255)
+      blendMode(MULTIPLY)
+      translate(width / 2, width / 2)
+      shapes.forEach(s => s.draw())
+    }
+
+    class Shape {
+      constructor(x, y, r) {
+        this.pos = createVector(x, y)
+        this.id = globalID++
+        this.r = r / 2
+        this.rr = 0
+        this.direction = this.id % 2 == 0 ? -1 : 1
+        this.divided = false
+        this.shapes = []
+        this.color =colors[this.id%3]
+      }
+
+      divide() {
+        this.divided = true
+        this.shapes.push(new Shape(this.pos.x +random(-this.r,this.r),random(height/2),this.r))
+        this.shapes.push(new Shape(random(width/2),random(height/2),this.r))
+      }
+
+      draw() {
+        if (this.divided) {
+          this.shapes.forEach(s => s.draw())
+        } else {
+          this.rr += 0.001 * this.direction
+          push()
+          noFill()
+          translate(this.pos.x, this.pos.y)
+          rotate(this.rr)
+          beginShape()
+          const fillcolor = color(this.color)
+          fillcolor.setAlpha(240)
+          for (let a = 0; a < TWO_PI; a += 0.3) {
+            const offset = map(noise(frameCount * 0.01, a, this.id), 0, 1, -this.r / 4, this.r / 4)
+            const r = this.r + offset
+            const x = r * cos(a)
+            const y = r * sin(a)
+            push()
+            noFill()
+            stroke(this.color)
+            circle(x, y, 6)
+
+            pop()
+            noStroke()
+            fill(fillcolor)
+            vertex(x, y)
+          }
+          endShape(CLOSE)
+          pop()
+
+        }
+      }
+    }
+
+  </script>
+</body>
+
+</html>

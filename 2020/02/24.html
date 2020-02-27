@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body>
+  <script>
+    const colorUrl = "https://coolors.co/447fb4-5696ce-6bb2ef-7fc3ff-171738"
+    const colors = colorUrl.match(/[a-f0-9]{6}/g).map(c => "#" + c)
+    const W = 600
+    let shapes = []
+    const col=4
+    const size = W/col
+
+    function setup() {
+      createCanvas(W, W)
+      for (let i = 0; i < col*col; i++) {
+        shapes.push(new Shape(i%col*size, floor(i/col)*size, size/col))
+      }
+    }
+
+    function draw() {
+      background(255)
+      translate(size/2,size/2)
+      shapes.forEach(s => s.draw())
+    }
+
+    class Shape {
+      constructor(x, y, r) {
+        this.pos = createVector(x, y)
+        this.r = r
+        this.n = floor(random(5,16))
+      }
+
+      draw() {
+        push()
+        noFill()
+        translate(this.pos.x, this.pos.y)
+        beginShape()
+        let b = 0
+        for (let a = 0; a < TWO_PI; a += 0.1) {
+          const offset = map(sin(a * this.n + frameCount * 0.1), -1, 1, -this.r / 4, this.r/ 4)
+          const r = this.r + offset
+          const x = r * cos(a)
+          const y = r * sin(a)
+          stroke(colors[0])
+          vertex(x, y)
+          push()
+          circle(x, y, 4)
+          pop()
+        }
+        endShape(CLOSE)
+        pop()
+      }
+    }
+
+  </script>
+</body>
+
+</html>
