@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body>
+  <script>
+
+    const num = 20
+    let counter = 0
+    let yoff = 0
+
+    function setup() {
+      createCanvas(600, 1000)
+      /*
+      drawingContext.shadowOffsetX = 10;
+      drawingContext.shadowOffsetY = 10;
+      drawingContext.shadowBlur = 30;
+      drawingContext.shadowColor = "#00000066"
+      600/100 = 6
+      6 = 600/(100
+
+      */
+      strokeWeight(0.5)
+      stroke('#ed542aCC')
+      noFill()
+    }
+
+    function draw() {
+      background(255)
+      background('#ed542a33')
+      const m = 5
+      const n = width / m
+      for (let a = 0; a < 41; a++) {
+        const x = a % m
+        const y = floor(a / m)
+        push()
+        translate(x * (n / 1.2) + 90, y * (n / 1.2) + 100)
+        rotate(map(noise(y, x / 10), 0, 1, 0, TWO_PI))
+        for (let i = 0; i < 200; i++) {
+          const r = 20 + (i * 0.25)
+          const l = map(noise(i, x, y), 0, 1, 0, HALF_PI)
+          arc(0, 0, r, r, -PI / 2, PI + l)
+        }
+        pop()
+      }
+      noLoop()
+    }
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body>
+    <script>
+
+      const eyes = []
+      let mouse
+
+      function setup() {
+        createCanvas(600, 600)
+        for(let i=0; i<20; i++) {
+          eyes.push(new Eye(random(0,width), random(0,height), i))
+        }
+
+        mouse = createVector()
+      }
+
+      function draw() {
+        mouse.set(mouseX, mouseY)
+        background(0)
+        eyes.forEach(b => {
+          b.draw()
+        });
+      }
+
+
+      class Eye {
+        constructor(x, y) {
+          this.tgt = createVector(x, y)
+          this.pos = createVector(x, y)
+          this.vel = p5.Vector.random2D()
+          this.acl = createVector()
+          this.maxSpeed = 10
+          this.maxForce = 2
+        }
+
+        update() {
+
+          const restore = this.restore()
+          const flee = this.flee()
+
+          this.acl.add(restore)
+          this.acl.add(flee)
+
+          this.pos.add(this.vel)
+          this.vel.add(this.acl)
+          this.acl.mult(0)
+        }
+
+        draw() {
+          noStroke()
+          fill(255)
+          this.update()
+
+          circle(this.pos.x, this.pos.y ,50)
+          push()
+          translate(this.pos.x,this.pos.y)
+          const a = atan2(mouse.y - this.pos.y, mouse.x - this.pos.x)
+          rotate(a)
+          fill(0)
+          circle(14,0,20)
+          pop()
+        }
+
+        restore() {
+          var desired = p5.Vector.sub(this.tgt, this.pos)
+          var speed = this.maxSpeed
+          if (desired.mag() < 200) {
+            speed = map(desired.mag(), 0, 100, 0, this.maxForce)
+          }
+          desired.setMag(speed)
+          let steer = p5.Vector.sub(desired, this.vel)
+          steer.limit(this.maxForce)
+          return steer
+        }
+
+        flee() {
+          var desired = p5.Vector.sub(createVector(mouseX, mouseY), this.pos)
+          var d = desired.mag()
+          if (d < 200) {
+            desired.setMag(this.maxSpeed)
+            desired.mult(-1)
+            let steer = p5.Vector.sub(desired, this.vel)
+            steer.limit(this.maxForce)
+            return steer
+          }
+          return createVector(0, 0)
+
+        }
+
+
+      }
+
+    </script>
+</body>
+
+</html>

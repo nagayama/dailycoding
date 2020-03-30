@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #FFF;">
+  <script>
+    function setup() {
+        createCanvas(W = 600, W, WEBGL);
+        background(0);
+      }
+
+      let index = 0
+
+      function draw() {
+        randomSeed(1)
+        directionalLight(85, 175, 175, -W / 2, 0, -100)
+        // pointLight(85,175,175,W/2,0,0)
+        ambientLight(85, 175, 175)
+        background(85, 185, 175);
+        translate(-width / 2, -height / 2, -200)
+        divide(0, 0, width, height, 6)
+      }
+
+      function divide(x, y, w, h, depth) {
+        if (depth > 0) {
+          const n = noise(w / width * 2, w / height * 2, frameCount / 800 * depth)
+          if (depth-- % 2 === 1) {
+            divide(x, y, w * n, h, depth)
+            divide(x + w * n, y, w - w * n, h, depth)
+          } else {
+            divide(x, y, w, h * n, depth)
+            divide(x, y + h * n, w, h - h * n, depth)
+          }
+        } else {
+          push()
+          //noFill()
+          //stroke(255, 100)
+          translate(x + w / 2, y + h / 2)
+          //rotateX(frameCount/200)
+          rotateY(frameCount * (random(-1, 1) * 0.05))
+          const r = floor(random(1, 3))
+          if (r == 0) {
+            box(w - 10, h - 10, w)
+          } else if (r == 1) {
+            cone(w / 2 - 10, h - 10, floor(random(1, 20)))
+          } else {
+            cylinder(w / 2 - 10, h - 10, floor(random(1, 20)))
+          }
+          pop()
+        }
+      }
+  </script>
+</body>
+
+</html>

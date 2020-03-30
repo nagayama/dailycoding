@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #fff;">
+  <script>
+t=0,draw=_=>{t++||createCanvas(W=400,W);clear();translate(W/2,W)+b(100)}
+b=l=>{l>2&&(line(0,0,0,-l),push(translate(0,-l)),pop(rotate(a=sin(t/90)*PI/2),b(l*=.7)),push(),pop(rotate(-a),b(l)))}//つぶやきProcessing
+  </script>
+</body>
+
+</html>

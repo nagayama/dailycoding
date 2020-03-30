@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #fff;">
+  <script>
+    let poseNet
+    let pose
+    let scl2 = 1
+    let angle2 = 0
+    let images = []
+    let samples = []
+    let ground = 0
+
+    function setup() {
+      createCanvas(640, 480)
+      background(0)
+      video = createCapture(VIDEO);
+      video.volume(0);
+      //video.hide()
+      poseNet = ml5.poseNet(video)
+      poseNet.on('pose', gotPoses)
+      frameRate(10)
+      ground = height/1.2
+    }
+
+    function gotPoses(poses) {
+      if (poses.length > 0) {
+        pose = poses[0].pose
+        if (pose && pose.leftAnkle.confidence > 0.6 && pose.rightAnkle.confidence > 0.6) {
+          const left = pose.leftAnkle.y
+          const right = pose.rightAnkle.y
+          const avg = (left + right) / 2
+          //stroke('#FFF')
+          //line(0, avg, width, avg)
+          //stroke('#F00')
+          if (samples.length < 20) {
+            samples.push(avg)
+            //const sum = samples.reduce((a, b) => a + b, 0);
+            ///ground = (sum / samples.length) || 0;
+          } else {
+            if (left < ground && right < ground) {
+              images.push(video.get(0, 0, width,height))
+              if (images.length > 30) {
+                images.shift()
+              }
+            }
+          }
+        }
+      }
+    }
+
+    function draw() {
+      background(0)
+      if(pose) {
+        circle(pose.leftAnkle.x, pose.leftAnkle.y, 10)
+        circle(pose.rightAnkle.x, pose.rightAnkle.y, 10)
+      }
+      if(images.length > 1) {
+        image(images[frameCount % images.length], 0, 0)
+      }
+      stroke(255)
+      line(0, ground, width, ground)
+    }
+
+  </script>
+</body>
+
+</html>

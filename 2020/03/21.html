@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #fff;">
+  <script>
+v=20,u=40,t=0,draw=_=>{t++||createCanvas(w=v*v,w);randomSeed(0),background(w);for(y=w;y-=u;)for(x=w;x-=u;){beginShape();for(r=3;r--;)d=[sin(q=t/30),cos(q)],s=random(d),vertex(cos(q=(r*(TAU/3)))*v*s+x,sin(q)*v*random(d)+y);endShape(CLOSE),circle(x,y,s*v)}}//#つぶやきProcessing
+  </script>
+</body>
+
+</html>

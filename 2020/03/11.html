@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body>
+  <script>
+    let s;
+    function preload() {
+      s = new p5.Shader(this._renderer, vert, frag)
+    }
+    function setup() {
+      createCanvas(600, 600, WEBGL);
+    }
+    function draw() {
+      s.setUniform("resolution", [width, height]);
+      s.setUniform("time", millis() / 1000.0);
+      shader(s);
+      rect(0, 0, width, height);
+    }
+
+    const vert = `
+attribute vec3 aPosition;
+attribute vec2 aTexCoord;
+varying vec2 vTexCoord;
+
+void main() {
+  vTexCoord = aTexCoord;
+  vec4 positionVec4 = vec4(aPosition, 1.0);
+  positionVec4.xy = positionVec4.xy * 2.0 - 1.0;
+  gl_Position = positionVec4;
+}
+`
+
+    const frag = `
+    precision mediump gfloat;
+uniform float time;       // time
+uniform vec2  resolution;       // resolution
+
+void main(void){
+  vec2 p = (gl_FragCoord.xy  - resolution) / min(resolution.x, resolution.y);
+  vec3 destColor = vec3(0);
+  float f = 0.0;
+  for(float i=.0;i<16.0;i++) {
+    float s = sin(time+i * 3.141592/8.0) * 0.5;
+    float c = cos(time+i * 3.141592/8.0) * 0.5;
+     f += 0.003/ abs(length(p + vec2(s,c)) - abs(sin(time*1.5)) * 0.3-0.05);
+  }
+  gl_FragColor = vec4(vec3(f),1.0);
+}
+
+`
+  </script>
+</body>
+
+</html>

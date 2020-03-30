@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body>
+  <script>
+    const colorUrl = "https://coolors.co/3562cc-cc1e69-d9c700-696366"
+    const colors = colorUrl.match(/[a-f0-9]{6}/g).map(c => "#" + c)
+
+    const W = 600
+    let balls = []
+    const ballNum = 180;
+    let center
+
+    function setup() {
+      createCanvas(W, W)
+      center = createVector(width / 2, height / 2)
+      //balls.push(new CenterBall())
+      for (let i = 0; i < ballNum; i++) {
+        balls.push(new Ball())
+      }
+    }
+
+    function draw() {
+      if (frameCount % 60 == 0) {
+        balls[0].r2 = random(0, width)
+      }
+      background(0)
+
+      strokeWeight(4)
+      stroke(255)
+      noFill()
+
+      beginShape()
+      balls.forEach(b => {
+        b.draw()
+      });
+      endShape(CLOSE)
+    }
+
+    class Ball {
+      constructor() {
+        this.id = balls.length
+        this.reset()
+      }
+
+      reset() {
+        this.r = 10
+        const rnd = random(0, 360)
+        const rad = radians(360 / ballNum * this.id)
+        this.pos = createVector(width / 2 + sin(rad) * width / 3, height / 2 + cos(rad) * width / 3)
+        this.vel = createVector(1, 1)
+        this.acl = createVector()
+        this.mass = 10
+        this.color = random(colors)
+      }
+
+      draw() {
+        for (let i = this.id + 1; i < balls.length; i++) {
+          const other = balls[i]
+          const dist = this.pos.dist(other.pos)
+          const c = (this.r / 2 + other.r / 2)
+          if (this.pos.dist(other.pos) < c) {
+            //ref: https://stackoverflow.com/questions/345838/ball-to-ball-collision-detection-and-handling
+            const delta = p5.Vector.sub(this.pos, other.pos)
+            const d = this.pos.dist(other.pos)
+            const mtd = delta.copy().mult((c - d) / d)
+            const im1 = 1 / this.mass
+            const im2 = 1 / other.mass
+
+            this.pos.add(mtd.copy().mult(im1 / (im1 + im2)))
+            other.pos.sub(mtd.copy().mult(im2 / (im1 + im2)))
+
+            const v = this.vel.copy().sub(other.vel)
+            const vn = v.dot(mtd.copy().normalize())
+
+            const im = (-(1 + 1) * vn) / (im1 + im2)
+            const impulse = mtd.copy().normalize().mult(im)
+
+            this.vel.add(impulse.copy().mult(im1))
+            other.vel.sub(impulse.copy().mult(im2))
+
+
+          }
+        }
+        this.acl.add(p5.Vector.sub(center, this.pos))
+        this.acl.div(1000)
+        this.vel.add(this.acl)
+        this.pos.add(this.vel)
+        curveVertex(this.pos.x, this.pos.y)
+      }
+    }
+
+  </script>
+</body>
+
+</html>

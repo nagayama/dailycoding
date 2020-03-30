@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body>
+  <script>
+    let s;
+    let s_texture
+    let theta = 0
+
+    function preload() {
+      s = new p5.Shader(this._renderer, vert, frag)
+    }
+    function setup() {
+      createCanvas(600, 600, WEBGL);
+      s_texture = createGraphics(width, height, WEBGL)
+      noStroke();
+      s_texture.noStroke()
+    }
+    function draw() {
+      background(0)
+      s.setUniform("resolution", [width, height]);
+      s.setUniform("time", millis() / 1000.0);
+      s_texture.shader(s);
+      s_texture.rect(0, 0, width, height);
+      texture(s_texture)
+      push()
+      translate(0, 0, 200)
+      rotateX(30)
+      rotateZ(theta)
+      rotateY(theta)
+      torus(200, 200)
+      pop()
+      theta += 0.01
+    }
+
+    const vert = `
+attribute vec3 aPosition;
+attribute vec2 aTexCoord;
+varying vec2 vTexCoord;
+
+void main() {
+  vTexCoord = aTexCoord;
+  vec4 positionVec4 = vec4(aPosition, 1.0);
+  positionVec4.xy = positionVec4.xy * 2.0 - 1.0;
+  gl_Position = positionVec4;
+}
+`
+
+    const frag = `
+    precision mediump float;
+uniform float time;       // time
+uniform vec2  resolution;       // resolution
+
+void main(void){
+  vec2 p = (gl_FragCoord.xy - resolution) / min(resolution.x, resolution.y);
+  vec2 q = mod(p, 0.2) - 0.1;          // mod を通してから一度別の変数に座標を入れる
+  vec3 destColor = vec3(0);
+  float f = 0.0;
+  for(float i=.0;i<16.0;i++) {
+    float s = sin(time+i * 3.141592/8.0) * 0.04;
+    float c = cos(time+i * 3.141592/8.0) * 0.04;
+     f += 0.0003/ abs(length(q + vec2(s,c)) - abs(sin(time*1.0)) * 0.03-0.015);
+  }
+  gl_FragColor = vec4(vec3(f),1.0);
+}
+
+
+`
+  </script>
+</body>
+
+</html>

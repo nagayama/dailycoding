@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #fff;">
+  <script>
+//v=30,setup=_=>{for(createCanvas(i=w=900,w),background(220);i--;)r=random([0,i]),x=i%v*v,y=int(i/v)*v,line(r?x:x+v,y,r?x+v:x,y+v)}//#つぶやきProcessing
+//setup=e=>{for(createCanvas(W=400,W),a=40,background(220),x=0;x<W;x+=a)for(y=0;y<W;y+=a)r=random([0,a]),line(x,y+r,x+a,y+a-r)};//#つぶやきProcessing
+//v=30,setup=_=>{for(y=v,createCanvas(w=900,w),background(220);y--;)for(x=v;x--;)r=random([0,x]),line(r?x:x+v,y,r?x+v:x,y+v)}//#つぶやきProcessing
+//setup=_=>{for(v=20,createCanvas(w=v*v,w),background(220),y=0;y<w;y+=v)for(x=0;x<w;x+=v)r=random([0,v]),line(x+r,y,x+v-r,y+v)}//#つぶやきProcessing
+ // setup=_=>{for(v=20,createCanvas(i=w=v*v,w),background(220);i--;)r=random([0,v]),line((x=i%v*v)+r,y=int(i/v)*v,x+v-r,y+v)}//#つぶやきProcessing
+w=20,t=0,draw=_=>{t||createCanvas(i=w*w,i),r=random([0,w]),x=t%w*w,line(x+r,y=int(t/w)*w,x+w-r,y+w),t++>i&&noLoop()}//#つぶやきProcessing
+
+
+//setup=e=>{for(createCanvas(W = 400, W), a = 40, background(220), x = 0; x < W; x += a)for (y = 0; y < W; y += a)r = random([0, a]), line(x, y + r, x + a, y + a - r) };//#つぶやきProcessing
+  </script>
+</body>
+
+</html>

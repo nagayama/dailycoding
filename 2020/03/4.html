@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body>
+  <script>
+    let theShader;
+    let W = 600
+    let theta = 0
+    let s_texture
+
+    function preload() {
+      theShader = new p5.Shader(this._renderer, vert, frag)
+    }
+
+    function setup() {
+      createCanvas(W, W, WEBGL);
+      s_texture = createGraphics(width, height, WEBGL)
+      noStroke();
+      s_texture.noStroke()
+    }
+
+    function draw() {
+      background(0)
+      theShader.setUniform("u_resolution", [width, height]);
+      theShader.setUniform("u_time", millis() / 1000.0);
+      theShader.setUniform("u_mouse", [mouseX, map(mouseY, 0, height, height, 0)]);
+      s_texture.shader(theShader);
+      //shader(theShader)
+      s_texture.rect(0, 0, width, height);
+
+
+      texture(s_texture)
+      theta += 0.01
+      push()
+      rotateX(theta)
+      rotateY(theta)
+      box(100, 100)
+      pop()
+
+    }
+
+    const vert = `
+attribute vec3 aPosition;
+attribute vec2 aTexCoord;
+varying vec2 vTexCoord;
+
+void main() {
+  vTexCoord = aTexCoord;
+  vec4 positionVec4 = vec4(aPosition, 1.0);
+  positionVec4.xy = positionVec4.xy * 2.0 - 1.0;
+  gl_Position = positionVec4;
+}
+`
+
+    const frag = `
+precision mediump float;
+
+varying vec2 vTexCoord;
+
+void main() {
+  vec2 coord = vTexCoord;
+  gl_FragColor = vec4(coord.x, coord.y, (coord.x+coord.y), 1.0 );
+}
+`
+  </script>
+</body>
+
+</html>

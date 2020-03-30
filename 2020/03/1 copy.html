@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body>
+  <script>
+
+    const boxes = []
+    let images = []
+    let pg
+
+    function preload() {
+      images.push(loadImage('1.png'))
+      images.push(loadImage('2.png'))
+      images.push(loadImage('3.png'))
+      images.push(loadImage('4.png'))
+
+    }
+
+    function setup() {
+      createCanvas(600, 600, WEBGL)
+
+      boxes.push(new Box(100, 100, 200, 200, images[0]))
+      boxes.push(new Box(300, 100, 200, 200, images[1]))
+      boxes.push(new Box(300, 300, 200, 200, images[2]))
+      boxes.push(new Box(100, 300, 200, 200, images[3]))
+    }
+
+    function draw() {
+      background(0)
+      translate(-width/2,-height/2)
+      boxes.forEach(b => {
+        b.draw()
+      });
+    }
+
+    class Box {
+      constructor(x, y, w, h, image) {
+        this.x = x
+        this.y = y
+        this.w = w
+        this.h = h
+        this.image = image
+        this.points = []
+        this.points.push(new Point(this.x, this.y))
+        this.points.push(new Point(this.x + this.w, this.y))
+        this.points.push(new Point(this.x + this.w, this.y + this.h))
+        this.points.push(new Point(this.x, this.y + this.h))
+      }
+
+      draw() {
+        texture(this.image)
+        textureMode(IMAGE);
+        beginShape()
+        this.points.forEach(p => {
+          p.update()
+          p.draw()
+        });
+        endShape(CLOSE)
+      }
+    }
+
+    class Point {
+      constructor(x, y) {
+        this.tgt = createVector(x, y)
+        this.pos = createVector(x, y)
+        this.vel = p5.Vector.random2D()
+        this.acl = createVector()
+        this.maxSpeed = 10
+        this.maxForce = 2
+      }
+
+      update() {
+
+        const restore = this.restore()
+        const flee = this.flee()
+
+        this.acl.add(restore)
+        this.acl.add(flee)
+
+        this.pos.add(this.vel)
+        this.vel.add(this.acl)
+        this.acl.mult(0)
+      }
+
+      draw() {
+        vertex(this.pos.x, this.pos.y)
+      }
+
+      restore() {
+        var desired = p5.Vector.sub(this.tgt, this.pos)
+        var speed = this.maxSpeed
+        if (desired.mag() < 200) {
+          speed = map(desired.mag(), 0, 100, 0, this.maxForce)
+        }
+        desired.setMag(speed)
+        let steer = p5.Vector.sub(desired, this.vel)
+        steer.limit(this.maxForce)
+        return steer
+      }
+
+      flee() {
+        var desired = p5.Vector.sub(createVector(mouseX, mouseY), this.pos)
+        var d = desired.mag()
+        if (d < 200) {
+          desired.setMag(this.maxSpeed)
+          desired.mult(-1)
+          let steer = p5.Vector.sub(desired, this.vel)
+          steer.limit(this.maxForce)
+          return steer
+        }
+        return createVector(0, 0)
+
+      }
+
+
+    }
+
+  </script>
+</body>
+
+</html>

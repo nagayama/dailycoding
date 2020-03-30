@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #fff;">
+  <script>
+w=20,t=0;draw=_=>{clear(),t++||createCanvas(i=w*w,colorMode(HSB,1)|noStroke()|i);for(y=i;y-=w;)for(x=i;x-=w;)fill(noise(x/i,y/i,t/i/.5),1,1).circle(x,y,w)}//#つぶやきProcessing #p5js
+  </script>
+</body>
+
+</html>

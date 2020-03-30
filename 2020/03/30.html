@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #fff;">
+  <script>
+
+    let root, lastNode = null
+    let vx = vy = 0
+    let num = 0
+    function setup() {
+        rectMode(CENTER);
+      createCanvas(600, 600)
+      root = new Node(0, 0)
+      lastNode = root
+      setInterval(() => {
+        lastNode = lastNode.addNode(random(0, width), random(0, height))
+      }, 500)
+    }
+
+    function draw() {
+      background(255)
+      let cur = root
+      vx += (width/2 - lastNode.x - vx)/10
+      vy += (height/2 - lastNode.y - vy)/10
+      translate(vx, vy)
+      while (cur = cur.node) {
+        cur.draw()
+      }
+    }
+
+    class Node {
+      constructor(x, y, parent) {
+        this.parent = parent
+        this.x = x
+        this.y = y
+        if(this.parent) {
+          this.x1 = this.parent.x
+          this.y1 = this.parent.y
+        }
+        this.node = null
+      }
+      addNode(x, y) {
+        this.node = new Node(x, y,this)
+        return this.node
+      }
+      draw() {
+        if (this.node) {
+          stroke(0, 50)
+          line(this.x, this.y, this.node.x1, this.node.y1)
+        }
+        this.x1 += (this.x - this.x1)/5
+        this.y1 += (this.y - this.y1)/5
+          stroke(0)
+        circle(this.x1, this.y1, 10)
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body>
+  <script>
+    let theShader;
+    let W = 600
+
+    function preload() {
+      theShader = new p5.Shader(this._renderer, vert, frag)
+    }
+
+    function setup() {
+      createCanvas(W, W, WEBGL);
+    }
+
+    function draw() {
+      theShader.setUniform("r", [width, height]);
+      theShader.setUniform("t", millis() / 1000.0);
+      theShader.setUniform("m", [mouseX, map(mouseY, 0, height, height, 0)]);
+      shader(theShader);
+      rect(0, 0, width, height);
+    }
+
+    const vert = `
+attribute vec3 aPosition;
+attribute vec2 aTexCoord;
+varying vec2 vTexCoord;
+
+void main() {
+  vTexCoord = aTexCoord;
+  vec4 positionVec4 = vec4(aPosition, 1.0);
+  positionVec4.xy = positionVec4.xy * 2.0 - 1.0;
+  gl_Position = positionVec4;
+}
+`
+
+    const frag = `
+    precision mediump float;
+uniform float t;       // time
+uniform vec2  r;       // resolution
+
+void main(void){
+	vec2 p = (gl_FragCoord.xy - r) / min(r.x, r.y);
+	vec3 destColor = vec3(0.0);
+	for(float i=0.0; i < 6.0; i++) {
+		float j = i+1.;
+		vec2 q = p + vec2(cos(t*j), sin(t*j)) * .5;
+		destColor.x += 0.01 / length(q);
+		destColor.y += 0.03 / length(q);
+		destColor.z += 0.08 / length(q);
+	}
+	gl_FragColor = vec4(destColor,1.0);
+
+}
+`
+  </script>
+</body>
+
+</html>

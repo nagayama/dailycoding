@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #fff;">
+  <script>
+w=20,a=[],setup=_=>{r=random;createCanvas(W=w*w,W);for(i=w;i--;)a[i]={x:W/2,y:W/2,v:r(-1,1),w:r(-1,1)}}
+draw=_=>{clear();for(i=w;i--;){with(b=a[i]){x>W|x<0&&(v*=-1);y>W|y<0&&(w*=-1);x+=v;y+=w;for(j=i;j--;)dist(...c=[x,y,a[j].x,a[j].y])<90&&(line(...c));circle(x,y,10)}}}
+  </script>
+</body>
+
+</html>

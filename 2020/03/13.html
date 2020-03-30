@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #FFF;">
+  <script>
+
+    const cubes = []
+    const n = 10;
+
+    function setup() {
+      createCanvas(600, 600, WEBGL)
+      //ortho(-width / 2, width / 2, height / 2, -height / 2, 0, 5000);
+      for (let y = 0; y <= n; y++) {
+        for (let x = 0; x <= n; x++) {
+          cubes.push(new Cube(x,y))
+        }
+      }
+
+    }
+
+    function draw() {
+      background(0)
+      normalMaterial();
+      //rotateY(frameCount/100)
+      translate(0,0,-200)
+      rotateX(cos(frameCount/200)*PI/2)
+      //rotateX(radians(0))
+      cubes.forEach(cube => {
+        cube.draw()
+      });
+    }
+
+
+    class Cube {
+      constructor(x, y) {
+        this.x = width / n * x - width / 2
+        this.y = width / n * y - height / 2
+        this.xn = x
+        this.yn = y
+        this.d = 100
+        this.d2 = 100
+      }
+
+      draw() {
+        push()
+        translate(this.x, this.y)
+        if(
+          frameCount % 200 < (abs(n/2 - this.xn)+1)*5
+          &&
+          frameCount % 200 < (abs(n/2 - this.yn)+1)*5
+        ) {
+          this.d2 = this.d2 == 100 ? width/2 : 100
+        }
+        this.d += (this.d2-this.d)/10
+        box(width/(n), height/(n), this.d)
+        pop()
+      }
+
+    }
+
+
+  </script>
+</body>
+
+</html>

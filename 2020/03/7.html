@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body>
+  <script>
+
+    const num = 20
+    let counter = 0
+
+    function setup() {
+      createCanvas(W = 600, W)
+      rectMode(CENTER)
+      drawingContext.shadowOffsetX = 10;
+      drawingContext.shadowOffsetY = 10;
+      drawingContext.shadowBlur = 30;
+      drawingContext.shadowColor = "#00000066"
+      noStroke()
+      fill(255)
+    }
+
+    function draw() {
+      background(255)
+      translate(width / 2, height / 2)
+      for (let i = num; i > 0; --i) {
+        push()
+        rotate(radians(sin(frameCount / 100) * i) * 20)
+        const s = width / num * i
+        rect(0, 0, s, s)
+        pop()
+      }
+    }
+
+
+  </script>
+</body>
+
+</html>
+
+
