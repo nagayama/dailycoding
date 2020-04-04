@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #ddd;">
+  <script>
+    let taroImg, box1Img, box2Img
+    let taro
+    let boxes = []
+    let bullets = []
+
+    function preload() {
+      taroImg = loadImage('./03/0.png');
+      box1Img = loadImage('./03/1.png');
+      box2Img = loadImage('./03/2.png');
+    }
+
+    function setup() {
+      createCanvas(800, 800)
+      taro = new Taro()
+      boxes.push(new Box())
+      setInterval(()=> {
+        if(random([true,false])) {
+      boxes.push(new Box())
+        }
+      }, 1000)
+    }
+
+    function draw() {
+      background(255)
+      for (let box of boxes) {
+        if(!box.hide) {
+        box.draw()
+        }
+      }
+      for (let bullet of bullets) {
+        if(!bullet.hide) {
+        bullet.draw()
+        }
+      }
+      taro.draw()
+
+    }
+
+    function keyPressed() {
+        if (keyCode === RIGHT_ARROW) {
+          bullets.push(new Bullet())
+          console.log(bullets)
+        }
+      }
+
+    class Bullet {
+      constructor() {
+        this.pos = createVector(taro.pos.x+100, taro.pos.y+80)
+      }
+      draw() {
+        if(this.hide) {
+        } else {
+        push()
+        noStroke()
+        fill(0,255,0)
+        this.pos.x += 5
+        translate(this.pos.x,this.pos.y)
+        circle(0, 0,20)
+        pop()
+        if(this.pos.x > width+20) {
+          this.hide = true
+        }
+        }
+      }
+    }
+
+    class Taro {
+      constructor() {
+        this.pos = createVector(0, height / 2)
+      }
+
+      draw() {
+        if (keyIsDown(UP_ARROW) && this.pos.y > 0) {
+          this.pos.y -= 5;
+        }
+
+        if (keyIsDown(DOWN_ARROW) && this.pos.y < height - 100) {
+          this.pos.y += 5;
+        }
+
+        if (keyIsDown(DOWN_ARROW) && this.pos.y < height - 100) {
+          this.pos.y += 5;
+        }
+
+        push()
+        translate(this.pos.x, this.pos.y)
+        image(taroImg, 0, 0, 100, 100)
+        pop()
+      }
+    }
+
+    class Box {
+      constructor() {
+        this.h = 113
+        this.w = 91
+        this.pos = createVector(width - this.w, random(this.h, height - this.h))
+        this.vel = createVector(random(-2, -3), 0)
+        this.disabled = false
+        this.hide = false
+      }
+
+      draw() {
+        if (this.disabled) {
+          push()
+          translate(this.pos.x, this.pos.y)
+          image(box2Img, 0, 0, 100, 100)
+          pop()
+        } else {
+          this.pos.add(this.vel)
+          push()
+          translate(this.pos.x, this.pos.y)
+          image(box1Img, 0, 0, 100, 100)
+          pop()
+          if (this.pos.x < -this.w) {
+            this.disabled = true
+            setTimeout(()=> this.hide=true, 1000)
+          }
+          for(let bullet of bullets) {
+            if (!bullet.hide) {
+              if (dist(this.pos.x, this.pos.y, bullet.pos.x, bullet.pos.y) < this.w) {
+                this.disabled = true
+                setTimeout(() => this.hide = true, 1000)
+                bullet.hide = true
+              }
+            }
+          }
+
+        }
+      }
+
+    }
+
+
+
+
+  </script>
+</body>
+
+</html>
