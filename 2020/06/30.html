@@ -1,0 +1,27 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+<script>
+//#つぶやきProcessing
+setup=_=>createCanvas(t=W=600,W)
+draw=_=>{t+=.1
+noStroke(background(0,0,39))
+for(i=999;i--;){
+beginShape()
+x=(noise(i)*t)%W
+y=sin(i+t/2000)*W
+for(j=5;j--;){
+w=noise(t/20+i)*20
+a=TAU*.4*j+x/90
+vertex(cos(a)*w+x,sin(a)*w+y)
+}endShape()}}
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+  <style>
+  </style>
+  <script>
+t=0
+setup=_=>c=createCanvas(W=600,W)
+draw=_=>{background(0)
+t++
+stroke(y=w=W/2)
+x=W
+for(i=0;i++<w;){r=9*i+9
+point(o=x-y,p=(=x+y)/3)
+i%29==1&&circle(o,p-abs(sin(t/9)*50),9)
+y+=v=sin(n=int(noise((t+i)/99)*5)*PI/2)*2
+x+=cos(n)*2}}//#つぶやきProcessing
+  </script>
+</body>
+
+</html>

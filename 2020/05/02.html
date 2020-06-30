@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <script src="https://unpkg.com/p5.createloop@0.1.3/dist/p5.createloop.js"></script>
+
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+  <style>
+    canvas{
+    }
+  </style>
+  <script>
+s=[],c=(x,y)=>[x-y,(x+y)/2],t=0;draw=_=>{t++||(C=createCanvas(W=600,W));noStroke(clear(colorMode(HSB,h=360,2,1)));blendMode(ADD);C.elt.style.filter=`blur(5px)contrast(70)`;for(i=W/2;i--;){p=i/3;let[x,y]=c(cos(q=W/TAU*p+t/60)*(r=p*sin(t/W)*3)+W,sin(q)*r+W/2);fill((t+i)%h,1,1);circle(x,y-(p*5),5)}}//#dailycodingchallenge #つぶやきProcessing
+      </script>
+</body>
+
+</html>

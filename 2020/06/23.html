@@ -1,0 +1,26 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+<script>
+t=0//#つぶやきProcessing
+setup=_=>createCanvas(W=600,W)
+draw=_=>{background(W)
+t+=.02
+scale(4)
+n=noise
+for(w=y=150;y--;)for(x=150;x--;){
+X=(x*2-w)/w
+Y=(y*2-w)/w
+r=sin(t)*20
+d=dist(X*r,Y*r,0,0)
+;(x|y)&d&x%4&y%4&&point(x,y)}}
+</script>
+</body>
+</html>

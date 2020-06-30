@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.5.46/Tone.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #fff;">
+
+  <script>
+    const scale = ['C#4', 'D#4', 'F#4', 'G#4', 'A#4', 'C#5', 'D#5', 'F#5' ]
+    const boxes = []
+    const num = 8
+    let cur = 0
+
+    function setup() {
+      colorMode(HSB, 360, 100, 100, 100)
+      createCanvas(400, 400)
+      for (let y = 0; y < num; y++) {
+        for (let x = 0; x < num; x++) {
+          boxes.push(new Box(x, y))
+        }
+      }
+    }
+
+    function draw() {
+      background(255)
+      cur = floor(frameCount / 30) % num
+      for (box of boxes) {
+        box.update(cur)
+        box.draw()
+      }
+    }
+
+    class Box {
+      constructor(x, y) {
+        this.x = x
+        this.y = y
+        this.active = random([true, false, false, false])
+        this.playing = false
+        if(this.active) {
+          this.synth = new Tone.Synth().toMaster();
+        }
+      }
+
+      update(cur) {
+        this.color = color(0,0,70,100)
+        if (this.x == cur) {
+          this.color = color(200,20,100,100)
+          if (!this.playing && this.active) {
+            this.synth.triggerAttackRelease(scale[this.y], '8n')
+            this.playing = true
+          }
+        } else {
+          this.playing = false
+
+        }
+          if(this.playing) {
+            this.color = color(200, 100, 100, 100)
+            fill(this.color)
+          } else {
+            noFill()
+
+          }
+      }
+
+      draw() {
+        rectMode(CENTER)
+        stroke(this.color)
+        strokeWeight(this.active ? 5 : 2)
+        rect(this.x * 50 + 25, this.y * 50 + 25, 30, 30)
+      }
+
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+  <style>
+  </style>
+  <script>
+setup=_=>c=createCanvas(t=W=600,W)
+draw=_=>{randomSeed(n=9)
+w=W/2
+t+=.02
+background(0,3)
+stroke(W)
+for(;n--;)push(),pop(translate(sin(s=TAU/9*n+t)*w/2+w,cos(s)*w/2+w),rotate(-t),rect(0,0,random(w/3)+9))
+image(c,sin(t)*3,3,W,W-6)}//#dailycodingchallenge #つぶやきProcessing
+  </script>
+</body>
+
+</html>

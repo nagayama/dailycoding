@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+  <style>
+    canvas{
+    }
+  </style>
+  <script>
+t=0
+setup=_=>createCanvas(W=600,W)
+f=(x,y,w)=>{push()
+translate(x,y)
+circle(0,0,w)
+if(w>5){rotate((sin(t)*TAU))
+line(0,0,0,a=v*w/4)
+f(0,a,w/2)
+line(0,0,0,b=-v*w/4)
+f(0,b,w/2)
+}pop()}
+draw=_=>{background(W)
+strokeWeight(3)
+noFill(v=sin(t+=.01)+2)
+f(w=W/2,w,w)}//#つぶやきProcessing
+  </script>
+</body>
+
+</html>

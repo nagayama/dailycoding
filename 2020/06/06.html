@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #fff;">
+  <script>
+t=0
+setup=_=>createCanvas(W=600,W)
+draw=_=>{clear(W)
+t+=.02
+for(i=3;i--;){push(a=[])
+push(translate(sin(o=-t-TAU*i/3)*80+W/2,cos(o)*80+W/2))
+for(j=3;j--;)circle(x=sin(p=t-TAU*j/3)*80,y=cos(p)*80,19),a.push(x,y)
+stroke(0,sin(t)*255)
+pop(pop(quad(...a)))}}//#つぶやきProcessing
+  </script>
+</body>
+
+</html>

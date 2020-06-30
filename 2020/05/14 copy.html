@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+  <style>
+  </style>
+  <script>
+    /*
+x=[],m=t=90
+setup=_=>createCanvas(W=600,W)
+draw=_=>{
+background(0,6)
+stroke(W)
+for(n=9;n--;){
+[X,Y]=x[n]||(x[n]=[(r=random)(W),r(W)])
+t++%m==1&&(x[~~r(x.length)]=0)
+for(i=m;i--;)line(X,Y,sin(p=r(W/9))*(l=r(W/9))+X,cos(p)*l+Y)}}//#dailycodingchallenge #つぶやきProcessing
+
+*/
+b=[]
+t=0
+setup=_=>createCanvas(W=600,W)
+draw=_=>{background(0,9)
+r=random
+stroke(255)
+for(i=9;i--;){[x,y]=b[i]||(b[i]=[r(W),r(W)])
+for(j=90;j--;)l=r(W/8),X=sin(a=r(7))*l+x,Y=cos(a)*l+y,line(x,y,X,Y)}t++%90==1&&(b[~~r(b.length)]=0)}//#dailycodingchallenge #つぶやきProcessing
+
+
+
+
+
+
+</script>
+</body>
+
+<!--
+
+balls=[]
+
+setup=() => {
+  createCanvas(600, 600)
+}
+
+draw = () => {
+  background(0, 6)
+  stroke(255)
+  for (i = 0; i < 9; i++) {
+    if (!balls[i]) {
+      balls[i] = [random(width), random(height)]
+    }
+    [x, y] = balls[i]
+    for (j = 0; j < 90; j++) {
+      ang = random(PI*2)
+      len = random(width / 8)
+      x2 = sin(ang) * len + x
+      y2 = cos(ang) * len + y
+      line(x, y, x2, y2)
+    }
+  }
+  if (frameCount % 90 == 1) {
+    idx = int(random(balls.length))
+    balls.splice(idx, 1)
+  }
+}
+
+-->
+
+</html>

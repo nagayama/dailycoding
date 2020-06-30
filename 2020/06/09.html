@@ -1,0 +1,23 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #fff;">
+  <script>
+setup=_=>{createCanvas(W=600,W)
+for(x=W;x--;)for(y=W;y--;point(x,y)){
+X=(x*2-W)/W
+Y=(y*2-W)/W
+d=dist(X,Y,0,0)
+t=sin((atan2(X,Y)-d*2)*9)*.2
+t=.04/abs(.3+t-d)
+stroke(t*255)}}//#つぶやきProcessing
+  </script>
+</body>
+
+</html>

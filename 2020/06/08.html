@@ -1,0 +1,22 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #fff;">
+  <script>
+t=0
+setup=_=>{createCanvas(W=600,W)
+for(x=W;x--;)for(y=W;y--;point(x,y)){
+p=(x*y)%15
+d=dist(x,y,p,p)
+stroke(sin(d/7)*255)
+}}//#つぶやきProcessing
+  </script>
+</body>
+
+</html>

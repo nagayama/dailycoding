@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+  <style>
+  </style>
+  <script>
+t=0
+setup=_=>c=createCanvas(W=600,W)
+draw=_=>{
+background(0,7)
+t+=.1
+noStroke(fill(w=W/2))
+for(i=1;i++<21;){
+r=9*i+9
+circle(sin(n=(noise((t+i)/99)*9)*TAU)*r+w,cos(n)*r+w,9)}
+image(c,0,0,W-3,W-3)}//#つぶやきProcessing
+  </script>
+</body>
+
+</html>

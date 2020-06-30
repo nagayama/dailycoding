@@ -1,0 +1,22 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #fff;">
+  <script>
+t=0//#つぶやきProcessing
+setup=_=>{createCanvas(W=600,W)
+g=createGraphics(W,W)
+for(x=W;x--;)for(y=W;y--;g.point(x,y))X=(x*2-W)/W*3,Y=(y*2-W)/W*3,g.stroke(sin(dist(X-floor(X),Y-floor(Y),.5,.5)*26)*510)}
+draw=_=>{translate(w=W/2,w)
+t+=.01
+for(i=9;i--;)scale(sin(t)),image(g,-w,-w)}
+  </script>
+</body>
+
+</html>

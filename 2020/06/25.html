@@ -1,0 +1,25 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+<script>
+t=0
+setup=_=>c=createCanvas(W=600,W)
+draw=_=>{
+background(W,5)
+n=noise
+c.elt.style.filter=`blur(10px)contrast(40)`
+noStroke(w=W/2)
+colorMode(HSB,3,1,1,4)
+t+=.001
+for(j=3;j--;){fill(j,1,1,1)
+for(i=9;i--;)circle(n(t+i,j)*W,n(j,t+i)*W,w/2)}}//#つぶやきProcessing
+</script>
+</body>
+</html>

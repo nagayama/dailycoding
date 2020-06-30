@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+  <script>
+    t=0;draw=_=>{t++||createCanvas(W=300,W);stroke(W);fill(W);background(0,9);copy(W/4,W/4,W/2,W/2,0,0,W,W);o=[0,W/3];for(i=3;i--;)x=noise(t/100,i)*W,y = noise(i,t/100)*W,line(o[0],o[1], x,y),o=[x,y];line(o[0],o[1], W,W/3)}
+
+  </script>
+</body>
+</html>

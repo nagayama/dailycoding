@@ -1,0 +1,26 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #fff;">
+  <script>
+t=0
+w=50
+setup=_=>{createCanvas(W=w*10,W)
+n=noise
+pixelDensity(1)}
+draw=_=>{
+t+=.1
+scale(10)
+for(x=w;x--;)for(y=w;y--;point(x,y)){
+stroke((x*y+t)%10*w)
+}}//#つぶやきProcessing
+  </script>
+</body>
+
+</html>

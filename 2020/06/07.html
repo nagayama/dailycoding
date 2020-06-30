@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #fff;">
+  <script>
+t=0
+setup=_=>createCanvas(W=600,W)
+draw=_=>{clear(t+=.02)
+r=cos(t)*60+90
+for(i=4;i--;){a=[]
+X=sin(o=-t-TAU*i/4)*r+W/2
+Y=cos(o)*r+W/2
+stroke(0)
+for(j=3;j--;)circle(x=sin(p=t-TAU*j/3)*r+X,y=cos(p)*r+Y,9),a.push(x,y)
+noFill(stroke(0,sin(t+i/9)*W+255))
+quad(...a)}}//#つぶやきProcessing
+  </script>
+  <!--
+t=0
+setup=_=>createCanvas(W=600,W)
+draw=_=>{clear(t+=.02)
+s=sin
+for(i=9;i--;){push(a=[])
+push(translate(s(o=-t-TAU*i/9)*90+W/2,cos(o)*90+W/2))
+for(j=3;j--;)circle(x=s(p=t-TAU*j/3)*90,y=cos(p)*90,9),a.push(x,y)
+noFill(stroke(0,s(t+i/9)*W))
+pop(pop(quad(...a)))}}//#つぶやきProcessing
+  -->
+</body>
+
+</html>

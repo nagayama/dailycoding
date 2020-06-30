@@ -1,0 +1,23 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+  <script>
+t=0//#つぶやきProcessing
+setup=_=>{createCanvas(W=600,W)
+g=createGraphics(V=W+99,40)
+g.noStroke()
+for(x=9;x--;)g.circle(x*V/9,20,40)}
+draw=_=>{t+=.01
+background(0,8)
+r=V/9
+for(i=9;i--;)image(g,(t+noise(t/9+i)*6e3)%r-r,sin(t%TAU+i)*W/2+W-W/2,0)}
+  </script>
+</body>
+</html>

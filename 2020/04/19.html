@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+      <script src="https://unpkg.com/p5.createloop@0.1.3/dist/p5.createloop.js"></script>
+
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #fff;">
+<script>//🚗
+S=30;t=0;X=0;draw=_=>{t++||createCanvas(W=600,W);
+clear();
+for(y=20;y-->10;)for(x=20;x--;x!=9&&rect(x*S,y*S,S));
+u=t/60;
+X=~~(u-.5)%9;
+Y=X>7?8:~~u%9;
+translate(X*S,Y*S)
+rotate(AU/(X%4))
+for(a=4;a--;rect(a%3*S,~~(a/3)*S,S));
+}
+//#dailycodingchallenge #つぶやきProcessing
+</script>
+</body>
+
+</html>

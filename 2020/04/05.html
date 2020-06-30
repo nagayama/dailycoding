@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #ddd;">
+  <script>
+    let hearts = []
+    let capture
+    setup = () => {
+      createCanvas(375, 664)
+      capture = createCapture(VIDEO);
+      capture.hide()
+      hearts.push(new Hert())
+      colorMode(HSB, 360, 100, 100, 100)
+    }
+
+    draw = () => {
+      background(0)
+      if (capture.loadedmetadata) {
+        let ratio = height / capture.height
+        translate(0, 0)
+        push()
+        image(capture, (capture.width * ratio) / -2 + width / 2, 0, capture.width * ratio / 2, capture.height * ratio, 0, 0, capture.width / 2, capture.height)
+        filter(GRAY);
+        pop()
+        push()
+        translate(width / 2, 0)
+        scale(-1, 1)
+        image(capture, (capture.width * ratio) / -2, 0, capture.width * ratio / 2, capture.height * ratio, 0, 0, capture.width / 2, capture.height)
+        filter(GRAY);
+        pop()
+        translate(width - 40, height - 30)
+        if (frameCount % 6 == 1 && random([true, false])) generate()
+        for (let heart of hearts) {
+          heart.draw()
+        }
+      }
+    }
+
+    generate = () => {
+      hearts.push(new Hert())
+    }
+
+    class Hert {
+      constructor() {
+        this.x = random(0, 360)
+        this.y = 0
+        this.w = random(10, 20)
+        this.s = 0
+        this.s2 = random(0.2, 2)
+        this.vel = map(this.s, 2, 0.2, 1, 3)
+        this.color = random(0, 360)
+      }
+
+      draw() {
+        if (this.y < -height) return
+        push()
+        noStroke()
+        fill(this.color, 100, 100, map(this.y, -100, -height * 0.75, 50, 0))
+        this.y -= this.vel
+        translate(cos(this.x-- / 20) * this.w, this.y)
+        this.s += (this.s2 - this.s) / 3
+        scale(this.s)
+        beginShape()
+        for (let a = 0; a < TWO_PI; a += 0.01) {
+          const r = 1
+          const x = 16 * Math.pow(sin(a), 3)
+          const y = 13 * cos(a) - 5 * cos(2 * a) - 2 * cos(3 * a) - cos(4 * a)
+          vertex(x, -y)
+        }
+        endShape()
+        pop()
+      }
+
+    }
+
+  </script>
+</body>
+
+</html>

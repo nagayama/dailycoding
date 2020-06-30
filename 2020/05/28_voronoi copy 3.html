@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+  <style>
+    canvas {}
+  </style>
+  <script>
+t=0
+setup=_=>createCanvas(W=100,W)
+draw=_=>{t+=.02
+for(y=W;y--;)for(m=x=W;x--;m=W)for(i=5;i--;){
+d=dist(x,y,noise(i+t)*W,noise(0,i+t)*W)
+d<m&&(m=d,stroke(cos((d-(t*29))/2)*255),point(x,y))}}//#つぶやきProcessing
+  </script>
+</body>
+
+</html>

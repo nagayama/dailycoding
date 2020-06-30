@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+  <style>
+  </style>
+  <script>
+t=0
+setup=_=>createCanvas(W=600,W)
+draw=_=>{
+background(0,sin(t/5)*90)
+t+=.1
+C=cos
+S=sin
+c=circle
+noStroke(fill(w=W/2,99))
+c(S(t)*20+W/3,C(t)*30+W/4,9)
+c(C(t)*20+W/1.5,S(t)*30+W/4,9)
+c(S(S(t))*8+w,C(C(t))*8+W/2.5,9)
+c(S(p=S(t))*70+w,C(p)*50+w,9)}//#つぶやきProcessing
+  </script>
+</body>
+
+</html>

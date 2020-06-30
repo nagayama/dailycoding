@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+  <style>
+  </style>
+  <script>
+Y=[]
+V=[]
+t=m=3
+setup=_=>c=createCanvas(W=600,W)
+draw=_=>{background(0,9)
+t+=.01
+for(a=x=W/m;x--;){y=Y[x]||(Y[x]=0)
+v=V[x]||(V[x]=random(2)+1)
+Y[x]+=v
+if(y>W/4)Y[x]=V[x]=0
+noStroke(fill(W,a))
+circle(sin(p=TAU/a*x+sin(t+v)/v)*(50+y)+W/2,cos(p)*(50+y)+W/2,m)}}//#つぶやきProcessing
+  </script>
+</body>
+
+</html>

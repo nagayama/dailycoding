@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+  <script>
+t=0
+setup=_=>createCanvas(W=600,W)
+draw=_=>{
+t+=.002
+background(W)
+n=noise
+for(i=1e3;i--;){
+m=W
+x=n(i+t)*W
+y=n(0,i+t)*W
+for(j=20;j--;)(d=dist(x,y,X=n(j+t)*W,Y=n(0,j+t)*W)),d<m&&(m=d,o=X,p=Y)
+line(x,y,o,p)
+}}//#つぶやきProcessing
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+  <style>
+  </style>
+  <script>
+setup=_=>c=createCanvas(W=600,W)
+draw=_=>{C=cos
+r=random
+push(background(a=0,1))
+translate(p=r(W),r(W))
+for(beginShape(rotate(p));a<6;a+=.2)vertex(16*pow(sin(a),3),13*C(a)-5*C(2*a)-2*C(3*a)-C(4*a))
+pop(endShape())
+image(c,-4,-4,W+8,W+8)}//#dailycodingchallenge #つぶやきProcessing
+
+// 0x1F000
+// 0x1F0B1
+</script>
+
+
+</body>
+
+</html>

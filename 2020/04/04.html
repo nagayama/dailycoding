@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #ddd;">
+  <script>
+    aliens = []
+    setup = () => {
+      createCanvas(600, 600)
+      v = createVector(random(-width / 4, width / 4), random(-width / 4, width / 4))
+      aliens.push(new Alien(v))
+      rectMode(CENTER)
+      textAlign(CENTER, CENTER)
+    }
+
+    draw = () => {
+      background(0, 100)
+      if (aliens.length < 300) generate()
+      translate(width / 2, height / 2)
+      aliens.forEach(alien => alien.draw())
+    }
+
+    generate = () => {
+      v = createVector(random(-width / 2, width / 2), random(-width / 2, width / 2))
+      if (dist(v.x, v.y, 0, 0) < width/3) {
+        for (let alien of aliens) {
+          if (v.dist(alien.pos) > alien.size / 2) {
+            aliens.push(new Alien(v))
+            return
+          }
+        }
+      }
+    }
+
+    class Alien {
+      constructor(v) {
+        this.pos = v
+        this.id = aliens.length
+        this.size = 1
+        this.growing = true
+      }
+
+      draw() {
+        for (let i = this.id + 1; i < aliens.length; i++) {
+          const other = aliens[i]
+          const dist = this.pos.dist(other.pos)
+          if (dist < (this.size + other.size) / 2) {
+            this.growing = false
+            other.growing = false
+          }
+        }
+        textSize(this.size)
+        const v2 = this.pos.copy()
+        v2.rotate(radians(Math.sin(radians(frameCount / 3)) * 360))
+        text("👾", v2.x, v2.y + this.size / 8)
+        //text(char, v2.x, (v2.y + r / 8))
+        if (this.growing) {
+          this.size++
+        }
+      }
+
+    }
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+  <script>
+
+    let s = 30
+
+    function setup() {
+      createCanvas(800, 800)
+      noStroke()
+      fill(0)
+      rectMode(CENTER)
+      setInterval(() => {
+        s = int(random(20, width))
+      }, 1000)
+    }
+
+    function draw() {
+      background(255)
+      //let s = map(noise(frameCount/500), 0,1,20,100);
+      let w = abs(sin(frameCount / 200) * s)
+      let ss = ceil(width / s)
+      const c = s / 2
+      for (let i = 0; i <= ss * ss; i++) {
+        const x = i % ss
+        const y = int(i / ss)
+        push()
+        translate(x * s + s / 2, y * s + s / 2)
+        const rx = map(x, 0, ss, 0, PI * cos(frameCount / 100) * 4)
+        //const ry  = map(y,0,ss,0,PI*4)
+        rotate(rx + frameCount / 50)
+        rect(0, 0, w + 2, s)
+        rect(0, 0, s, w + 2)
+        point(0, 0)
+        pop()
+      }
+    }
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+  <style>
+  </style>
+  <script>
+z=0
+m=15
+n=100
+setup=_=>createCanvas(W=600,W)
+draw=_=>{background(W)
+z++
+for(y=W;y-=m;)for(x=W;x-=m;)push(circle(x,y,m)),pop(strokeWeight(noise(x/n,y/n,z/n)*m),circle(x,y,1))}//#つぶやきProcessing
+  </script>
+</body>
+
+</html>

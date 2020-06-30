@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <script src="https://unpkg.com/p5.createloop@0.1.3/dist/p5.createloop.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+  <script>
+
+    let root = null
+
+    function setup() {
+      createCanvas(600, 600)
+      root = new Segment(width / 2, height / 2)
+      let cur = root
+      for (let i = 0; i < 15; i++) {
+        cur.setChild()
+        cur = cur.child
+      }
+    }
+
+    function draw() {
+      background(255)
+      root.update()
+      root.draw()
+
+    }
+
+
+    class Segment {
+      constructor(x, y, len = 15) {
+        this.len = len
+        this.angle = 0
+        this.a = createVector(x, y)
+        this.calcB()
+      }
+
+      calcB() {
+        this.b = createVector(
+          this.a.x + this.len * cos(this.angle),
+          this.a.y + this.len * sin(this.angle)
+        )
+
+      }
+
+      setChild() {
+        this.child = new Segment(this.b.x, this.b.y, this.len * 1.1)
+      }
+
+      update() {
+        let target = null
+        if (!this.child) {
+          target = createVector(mouseX, mouseY)
+        } else {
+          target = createVector(this.child.a.x, this.child.a.y)
+        }
+        const direction = p5.Vector.sub(target, this.a)
+        this.angle = direction.heading()
+        direction.setMag(this.len)
+        direction.mult(-1)
+        this.a = p5.Vector.add(target, direction)
+        this.calcB()
+        if (this.child) this.child.update()
+        if (this.child) this.child.draw()
+
+      }
+
+      draw() {
+        strokeWeight(this.len)
+        line(this.a.x, this.a.y, this.b.x, this.b.y)
+        if(!this.child) {
+          const tgt1 = p5.Vector.sub(this.b, this.a)
+          tgt1.rotate(1)
+          tgt1.add(this.a)
+          const tgt2 = p5.Vector.sub(this.b, this.a)
+          tgt2.rotate(-1)
+          tgt2.add(this.a)
+          strokeWeight(20)
+          line(this.a.x,this.a.y,tgt1.x,tgt1.y)
+          line(this.a.x,this.a.y,tgt2.x,tgt2.y)
+
+        }
+      }
+
+
+
+    }
+
+
+  </script>
+</body>
+
+</html>
