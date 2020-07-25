@@ -1,0 +1,23 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+<script>
+//String.fromCharCode(parseInt("110010010010111",2))
+//(String.fromCharCode(parseInt("1000010000", 2)).charCodeAt() >>> 0).toString(2).split("").slice(1)
+t=0//#つぶやきProcessing
+draw=_=>{t||createCanvas(W=600,W)
+background(0)
+n=noise
+scale(4)
+t+=.02
+for(x=50;x--;)for(y=50;y--;)('ȀȀȐɔʪʺϯϿϿ'[int(noise(x/19,y/19,t)*9)].charCodeAt()>>>0).toString(2).split('').slice(1).forEach((c,i)=>stroke(c*W)+point(i%3+x*3,int(i/3)+y*3))}
+</script>
+</body>
+</html>

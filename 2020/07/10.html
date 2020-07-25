@@ -1,0 +1,24 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5/lib/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #f00;">
+<script>
+t=0//#つぶやきProcessing
+draw=_=>{t||createCanvas(t=W=600,W)
+t+=.02
+b=t%2<1
+s=b?300:200
+background(b?0:W)
+noFill(strokeWeight(s/2))
+stroke(b?W:0)
+for(x=W;x-=s;)for(y=W;y-=s;){
+arc(x,y,s,s,t*-PI,t*PI)}}
+</script>
+</body>
+</html>

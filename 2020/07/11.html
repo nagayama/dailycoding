@@ -1,0 +1,25 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+<script>
+setup=_=>createCanvas(t=W=600,W)
+draw=_=>{t+=.01//#つぶやきProcessing
+s=60
+background(W)
+strokeWeight(20)
+p=PI/2
+q=p/2
+for(x=W;x-=s;)for(y=W;y-=s;){
+a=sin(t+(x+y)/W)*q+q
+arc(x,y,s,s,a,p+a)
+arc(x,y,s,s,p*2+a,p*3+a)}}
+</script>
+</body>
+</html>

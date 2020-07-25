@@ -9,20 +9,12 @@
 
 <body style="background: #000;">
 <script>
-//#つぶやきProcessing
-setup=_=>createCanvas(t=W=600,W)
-draw=_=>{t+=.2
+t=0//#つぶやきProcessing #pchj02 @PCD_Tokyo
+draw=_=>{t||createCanvas(t=W=640,W)
+t+=.2
 noStroke(background(0,0,39))
-n=noise
-for(i=1e3;i--;){beginShape(e=i&1?8:10)
-fill(W,i&1?W:99)
-x=n(i)*W
-y=sin(i+t/3e3)*W
-for(j=e;j--;){
-w=(j&1?1:9*n(t*i/3e3))
-a=TAU/e*j
-vertex(cos(a)*w+x,sin(a)*w+y)
-}endShape()}}
+for(i=1e3;i--;fill(W,i&1?W:99)){beginShape(n=noise)
+for(j=8;j--;w=(j&1?1:9*n(t*i/3e3)),a=TAU/8*j,vertex(cos(a)*w+n(i)*W,sin(a)*w+cos(i+t/3e3)*W/2+W/2));endShape()}}
 </script>
 </body>
 </html>

@@ -1,0 +1,20 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body style="background: #000;">
+<script>
+t=0//つぶやきProcessing
+setup=()=>createCanvas(W=600,W)
+draw=()=>{clear(noStroke(t+=.01))
+for(d=180;d>0;d-=20)for(y=0;y<=W;y+=120)for(x=0;x<=W;x+=120){
+fill(d/20%2==0?0:W)
+circle(x+cos(x+y+t)*30,y+sin(x+y-t)*30,d)}}
+</script>
+</body>
+</html>
