@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #000;">
+<script>
+
+t=0//#つぶやきProcessing
+setup=_=>createCanvas(W=600,W)
+draw=_=>{clear(t+=1)
+w=W/2
+strokeCap(SQUARE);
+for(j=3;j--;)for(x=y=i=w;i--;){
+stroke(W,i)
+  line(x,y
+  ,x+=sin(n=(noise((t+i+j*2)/1e3)*199)*PI/4)*9
+  ,y+=cos(n)*9
+  )
+}}
+</script>
+</body>
+</html>

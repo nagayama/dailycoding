@@ -12,18 +12,14 @@
 </head>
 <body style="background: #000;">
 <script>
-t=0//#つぶやきProcessing
-setup=()=>createCanvas(W=720,405)
-draw=()=>{
-displayDensity(1)
-background(W)
-noStroke(t+=.01)
-for(d=180;d>0;d-=9)
-for(y=6;y--;)for(x=10;x--;){fill(d/9&1?0:W)
-a=t*5+d/30
-b=110
-e=0
-circle(x*b+e+sin(a)*(c=180-d)/(x&1?5:-5),y*b+e+cos(a)*c/(y&1?5:-5),d)}}
+//#つぶやきProcessing
+t=0
+draw=_=>{t||createCanvas(W=600,W)
+background(0)
+scale(4)
+t+=.01
+w=50;
+for(x=50;x--;)for(y=34;y--;)for(j=15;j--;)stroke(1<<j&'筯撗珧珏寉秏积穉篯篏'[[int(noise(x/w,y/w,t)*20)%10]].charCodeAt()?W:0)+point(j%3+x*4,int(j/3)+y*6)}
 </script>
 </body>
 </html>

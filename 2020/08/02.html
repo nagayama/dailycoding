@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #000;">
+<script>
+
+t=0//#つぶやきProcessing
+draw=_=>{t||createCanvas(W=600,W)
+background(W)
+t+=.01
+w=W/2
+S=sin
+C=cos
+c=constrain
+strokeWeight(9)
+for(n=30;n-->1;)for(j=i=4;i--;line(c(w+C(T)*r,a=w-p,b=w+p),c(w+S(T)*r,a,b),c(w+C(U)*r,a,b),c(w+S(U)*r,a,b)))T=TAU/j*i+t*(n&2?1:-1),U=T+PI/2,r=n*30,p=n*20}
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
