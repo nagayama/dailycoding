@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #000;">
+<script>
+
+t=0//#つぶやきProcessing
+draw=_=>{t||createCanvas(W=600,W)
+colorMode(HSB,m=20,0,0)
+strokeCap(SQUARE)
+t+=.1
+w=W/2
+for(j=9;j--;)for(y=w+cos(t/9)*90,x=w+sin(t/9)*90,i=m;i--;line(x,y,x+=sin(n=noise((j+t+i)/40,j/2)*m)*19,y+=cos(n)*19))stroke(i%10*2,1,1,.1)}
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+<style>
+  canvas{border:5px solid #000;}
+</style>
+
+<body style="background: #000;">
+<script>
+
+t=0//#つぶやきProcessing
+draw=_=>{t||(createCanvas(W=600,W).elt.style.filter=`blur(0px)contrast(19)`)
+noStroke()
+background(0)
+t+=.02
+l=60
+w=W/2
+for(y=W;y-=l;)for(x=W;x-=l;){
+d=dist(w,w,x,y)
+p=sin(t)
+ellipse(x,y,p*60,abs(cos(t)*60))
+}}
+</script>
+</body>
+</html>
