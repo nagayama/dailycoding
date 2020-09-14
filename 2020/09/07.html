@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #000;">
+<script>
+t=0//#つぶやきProcessing
+c=["red","green","blue"]
+draw=_=>{createCanvas(W=600,W)
+blendMode(ADD)
+noStroke(t+=.04)
+N=noise
+S=sin
+for(j=5;j--;)for(i=20;i--;){r=N(t/5,i,j)*W
+fill(c[i%3])
+circle(N(j,s=j+t/9)*W+cos(p=N(i,t/20,j)*PI*6)*r*S(t),N(j,s,W)*W+S(p)*r*S(t),N(i,j)*150)}}
+</script>
+</body>
+
+</html>

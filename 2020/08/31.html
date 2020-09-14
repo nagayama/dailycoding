@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #fff;">
+<script>
+T=0
+draw=_=>{createCanvas(w=600,w)
+background(0)
+e=99
+m=vertex
+c=circle
+T+=.03
+for(i=6;i--;){fill(w)
+stroke('#つぶやきProcessing')
+X=e*i
+beginShape(c(X+50,Y=w/2+sin(i-T)*e,e))
+for(t=e;--t;)m(X+t,Y+e+9*sin(t/4-T*9))
+m(X,Y)
+endShape(m(X+e,Y))
+fill(0)
+c(X+50,Y,9)
+c(X+e/4,Y,9)}}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #fff;">
+<script>
+t=0//#つぶやきProcessing
+draw=_=>{createCanvas(W=400,W)
+noStroke(t++)
+for(s=y=20+1;y--;)for(x=s+1;x--;fill((x+y)%6&&(x-y)%6?'#00A652':'#FFAE00')){q=[]
+for(i=3;i--;q.push(f(cos,X),f(sin,Y)))p=PI/2*i+dist(X=x*s,Y=y*s,w=W/2,w)/W-t/60,f=(F,m)=>min(max(F(p)*80+m,m-s),m+s)
+quad(...q)}}
+</script>
+</body>
+</html>

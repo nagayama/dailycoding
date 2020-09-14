@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #fff;">
+<script>
+t=0//#つぶやきProcessing
+setup=_=>createCanvas(W=400,W)
+draw=_=>{
+noStroke(t++)
+c=n=>lerpColor(color(0,166,82),color(255,174,0),(n+1)/2);
+s=60
+u=20
+m=t%s
+for(x=8;x--;)for(y=8;y--;)for(i=9;i--;){
+fill((x+y)%2||i%2?c(sin(t/u)):c(cos(t/u)))
+rect((0|i/3)*u+x*s-s+m,i%3*u+y*s-s+m,u)}}
+</script>
+</body>
+</html>

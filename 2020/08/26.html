@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #fff;">
+<script>
+t=0
+draw=_=>{createCanvas(W=600,W)
+noStroke(t+=.05)
+n=noise
+d=circle
+A=[fill('red')]
+for(i=20;i--;z=R/2,A[i]=[x+=c=cos(m=t+i)*(r=z-z/2),y+=s=sin(m)*r,z,'#つぶやきProcessing'],A[i+20]=[x+c/2,y+s/2,z/2,'blue'])d(x=n(i,T=t/9)*W,y=n(T,i)*W,R=n(i,T,T)*W)
+for(b of A)fill(b[3]),d(...b)}
+</script>
+</body>
+</html>

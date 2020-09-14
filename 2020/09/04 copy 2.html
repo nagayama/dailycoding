@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #fff;">
+  <script>
+    const checkboxes = []
+    let textArea = null
+    setup = () => {
+      createCanvas(w = 300, w)
+      textArea = createInput('').position(5 + w, 130)
+      for (let y = 0; y < 5; y++) {
+        for (let x = 0; x < 3; x++) {
+          checkboxes.push(createCheckbox().position(x * 15 + w, y * 15).changed(onCheck))
+        }
+      }
+    }
+
+    draw = () => {
+      background(255)
+      fill(0)
+      noStroke()
+      const S = 20
+      const str2 = textArea.value()
+      for(i=15;i--;)str2.charCodeAt()&1<<i&&rect(i%3*S,int(i/3)*S,S);
+    }
+
+    onCheck = e => {
+      let chars = checkboxes.map(c => c.checked() ? 1 : 0)
+      c= chars.reverse().join("")
+      c = char(parseInt(c,2))
+      textArea.value(c)
+    }
+
+  </script>
+</body>
+
+</html>

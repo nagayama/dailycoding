@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #000;">
+<script>
+t=0//#つぶやきProcessing #pchj03
+draw=_=>{t||(createCanvas(W=600,W).elt.style.filter=`blur(30px)contrast(9)`)
+clear(w=W/2)
+t+=.01
+T=TAU
+R=o=30
+n=6
+colorMode(HSB,T,1,1)
+for(j=0;j<7;j++,n+=6,R+=o)for(i=n;i--;circle(cos(q=sin(t-j/PI)*PI+T/n*i)*R+w,sin(q)*R+w,o))fill((T/n*i)%T,1,1)}
+</script>
+</body>
+</html>

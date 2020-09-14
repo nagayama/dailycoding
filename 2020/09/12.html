@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #fff;">
+<script>
+t=0//#つぶやきProcessing
+setup=_=>createCanvas(W=600,W)
+draw=_=>{
+w=W/2
+t+=.5
+for(i=3;i--;)circle(asin(sin(t/10))*90+w*i,acos(cos(t/40))*200+w-300,asin(sin(t/4))*45)}
+</script>
+</body>
+</html>

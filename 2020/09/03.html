@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #fff;">
+<script>
+t=0//#つぶやきProcessing
+setup=_=>createCanvas(w=600,w)
+draw=_=>{t+=.1
+c=w/2
+background(0,90)
+circle(cos(t)*19+c,sin(t)*19+c,90)
+p=get()
+f(0,0,1,1)
+f(w,0,-1,1)
+f(0,w,1,-1)
+f(w,w,-1,-1)}
+f=(j,k,l,m)=>{push()
+translate(j,k)
+scale(l,m)
+pop(image(p,0,0,c,c))}
+</script>
+</body>
+</html>

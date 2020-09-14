@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #fff;">
+<script>
+t=0
+c=[]
+draw=_=>{t++
+i=0
+for(n=y=32;y--;)for(x=n;x--;c[i].checked(1&sin(dist((x*2-n)/n,(y*2-n)/n,0,0)+t/99)*n)){
+i++
+c[i]||(c[i]=createCheckbox().position(x*15,y*15))}}
+</script>
+</body>
+</html>

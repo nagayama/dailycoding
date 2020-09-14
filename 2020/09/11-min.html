@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #fff;">
+<script>
+t=0//#つぶやきProcessing
+draw=_=>{createCanvas(W=600,W)
+t+=.02
+strokeWeight(7)
+for(y=W;y-=40;)for(x=W;x-=40;)for(i=4;i--;){p=TAU/4*i+t
+for(j=15;j--;)unchar("筯璚珧禧䧭秏篏䤯篯积彺㫫扎㭫狏ዏ"[0|t/PI*2%10])&1<<j&&mag(x-(j%3+2)*100,y-(int(j/3)+1)*100)<60&&(p-=t)
+line(x,y,cos(p)*20+x,sin(p)*20+y)}}
+</script>
+</body>
+
+</html>

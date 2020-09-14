@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #000;">
+<script>
+t=0//#つぶやきProcessing
+draw=_=>{t||(createCanvas(W=600,W))
+background(w=W/2)
+strokeWeight(9)
+t+=.2
+for(i=29;i--;circle(cos(i+t/p*25)*w+w,(W-p)-abs(sin(t/p*40))*p+p-40,80))p=noise(i)*w+50}
+</script>
+</body>
+</html>

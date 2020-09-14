@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #000;">
+<script>
+r="#D42D26"
+b="#2B68B1"
+t=0//#つぶやきProcessing #pchj03
+f=(A,F)=>A.push(F)
+draw=_=>{t||createCanvas(W=600,W)
+t+=.1
+background(w=W/2)
+n=12
+A=[]
+B=[]
+C=[]
+for(i=n;i--;){
+p=TAU/n*i+t/20
+f(A,[x=cos(p)*100+w,y=sin(p)*150+w,X=noise(i,t/10)*100+50,Y=noise(t/10,i)*100+50])
+z=noise(t/10,i)*100
+f(B,[x+=cos(t+i)*(X/2-z/2),y+=sin(t+i)*(Y/2-z/2),z])
+f(C,[x+cos(t-i)*z/4,y+sin(t-i)*z/4,z/2])
+}
+fill(r)
+stroke(r)
+strokeWeight(10)
+A.forEach(f=>ellipse(...f))
+noStroke()
+fill(W)
+B.forEach((f,i)=>i%2==1&&ellipse(...f))
+fill(b)
+C.forEach((f,i)=>i%2==1&&ellipse(...f))
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #000;">
+<script>
+x=t=0//#つぶやきProcessing #pchj03
+draw=_=>{t||createCanvas(W=600,W)
+background(w=W/2)
+p=TAU/2
+t+=TAU/60
+c=cos
+s=sin
+C=circle
+o=40
+x+=TAU*o/60
+x%=W
+y=W-abs(s(t/2))-o
+h=400
+for(i=2;i--;C(X,Y,9))line(x,h,X=x+c(A=t+p*i)*o,Y=y+s(A)*o)
+C(x,s(t*2)*15+h,o)}
+</script>
+</body>
+</html>

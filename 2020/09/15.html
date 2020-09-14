@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #fff;">
+<script>
+t=0
+setup=_=>createCanvas(W=600,W)
+draw=_=>{background(w=W/2)
+strokeWeight(3)
+noFill(t++)
+for(j=6;j--;){beginShape()
+for(i=0;i<100;i++)curveVertex(i*6,cos(i/6+(t+j*10)/20)*sin(i/(PI*10))*w/2+w)
+endShape('#つぶやきProcessing')}}
+</script>
+</body>
+</html>

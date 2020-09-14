@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #000;">
+<script>
+X=[]//#つぶやきProcessing
+Y=[]
+t=0
+draw=_=>{t||(createCanvas(W=600,W))
+background(W)
+c=constrain
+t+=.5
+fill(0)
+x=sin(t/9)*W/2
+y=cos(t/9)*W/2
+w=W
+for(i=6;i--;){w/=2
+fill(i%2?0:W)
+rect(x=X[i]=c(X[i]||0,x,x+w),y=Y[i]=c(Y[i]||0,y,y+w),w)}}
+</script>
+</body>
+</html>

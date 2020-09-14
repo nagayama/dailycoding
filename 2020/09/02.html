@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/assets/p5.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #fff;">
+<script>
+t=0 //#つぶやきProcessing
+draw=_=>{createCanvas(W=600,W)
+background(0)
+t+=.02
+s=sin
+c=cos
+for(y=W;y-=60;)for(x=W;x-=60;pop(circle(0,0,60))){push()
+applyMatrix(s(t),c(p=t-y-x),c(t),s(p),x,y)}}
+</script>
+</body>
+</html>
