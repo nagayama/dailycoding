@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/clmtrackr@1.1.2/build/clmtrackr.min.js"></script>
+  <meta charset="utf-8" />
+</head>
+
+<body style="background: #fff;">
+  <script>
+// This code from the following video:  https://www.youtube.com/watch?v=sRLWIAPaiRI
+let osc, playing, freq, amp;
+let capture
+let ctracker
+
+function setup() {
+  let cnv = createCanvas(640, 480);
+  osc = new p5.Oscillator('sawtooth');
+  capture = createCapture(VIDEO, playOscillator)
+  capture.size(640, 480)
+  capture.hide()
+  ctracker = new clm.tracker();
+  ctracker.init();
+  ctracker.start(capture.elt);
+}
+
+function draw() {
+  let mouseDist
+  background(220)
+  image(capture, 0, 0)
+
+  var positions = ctracker.getCurrentPosition();
+  if (positions) {
+    positions.forEach(pos => {
+      fill(255, 0, 0)
+      noStroke()
+      circle(pos[0], pos[1], 5)
+    })
+
+    const mouseTop = createVector(positions[60][0], positions[60][1])
+    const mouseBottom = createVector(positions[57][0], positions[57][1])
+
+    mouseDist = mouseTop.sub(mouseBottom).mag()
+
+    https://bennettfeely.com/ztext/
+    freq = constrain(map(mouseDist, 4, 20, 100, 500), 100, 500);
+    amp = constrain(map(mouseDist, 4, 20, 0, 0.5), 0, 1);
+    playing = true
+  } else {
+    playing = false
+  }
+
+
+  //text('tap to play', 20, 20);
+  //text('freq: ' + freq, 20, 40);
+  //text('amp: ' + amp, 20, 60);
+
+  if (playing) {
+    // smooth the transitions by 0.1 seconds
+    osc.freq(freq, 0.1);
+    osc.amp(amp, 0.1);
+  }
+}
+
+function playOscillator() {
+  // starting an oscillator on a user gesture will enable audio
+  // in browsers that have a strict autoplay policy.
+  // See also: userStartAudio();
+  osc.start();
+  playing = true;
+}
+
+function mouseReleased() {
+  // ramp amplitude to 0 over 0.5 seconds
+  osc.amp(0, 0.5);
+  playing = false;
+}
+  </script>
+</body>
+
+</html>

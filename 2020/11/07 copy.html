@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+    <meta charset="utf-8" />
+    <style>canvas{
+      outline: 2px red solid;
+    }
+      </style>
+  </head>
+
+  <body style="background: #fff">
+    <script>
+t=0//#つぶやきProcessing
+draw=_=>{createCanvas(W=600,W)
+background(0)
+w=W/2
+t+=.01
+for(j=6;j--;)for(i=30;i--;){
+p=noise(t+i/99)*(PI**2)+TAU/6*j
+r=i*13
+circle(sin(p)*r+w, cos(p)*r+w,9)}}
+</script>
+    
+  </body>
+</html>

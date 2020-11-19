@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+    <meta charset="utf-8" />
+    <style>canvas{
+    }
+      </style>
+  </head>
+
+  <body style="background: #fff">
+    <script>
+//cafe wall illusion
+s=t=30
+draw=_=>{createCanvas(W=600,W)
+stroke(150)
+strokeWeight(4)
+t+=.02
+for(y=W+s;y-=s;)for(x=W+s*4;x-=s;rect((y/s%2?sin(t)*s*4+x:x)-s*2,y-s,s))fill((x+y)/s%2==0?0:"#つぶやきProcessing")}
+    </script>
+  </body>
+</html>

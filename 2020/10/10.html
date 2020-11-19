@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+    <meta charset="utf-8" />
+    <style>canvas{
+    }
+      </style>
+  </head>
+
+  <body style="background: #fff">
+    <script>
+t=q=50//#つぶやきProcessing
+f=(n,x,y)=>n&&(push(fill(n%2?0:W)),translate(x,y),rotate(PI/2),circle(c=cos(t)*q,s=sin(t/2)*q,s),pop(f(--n)))
+draw=_=>{createCanvas(W=600,W)
+t+=.01
+for(x=W;x-=100;)for(y=W;y-=100;)f(7,x,y)}
+    </script>
+  </body>
+</html>

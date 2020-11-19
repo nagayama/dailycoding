@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+    <meta charset="utf-8" />
+    <style>canvas{
+    }
+      </style>
+  </head>
+
+  <body style="background: #fff">
+    <script>
+t=0//#つぶやきProcessing
+draw=_=>{createCanvas(W=600,W)
+t++
+w=720
+n=0
+for(y=w;y-=60;)for(x=w;x-=60;n++){
+push(noStroke())
+blendMode(MULTIPLY)
+for(i=4;i--;){fill("#"+["0f0","f0f","0ff","ff0"][(n)%4])
+f=m=>constrain(m(TAU/4*i+t/30)*60,-30,30)
+circle(f(sin)+x-60,f(cos)+y-60,30)}pop()}}
+    </script>
+  </body>
+</html>

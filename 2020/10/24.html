@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+    <meta charset="utf-8" />
+    <style>canvas{
+    }
+      </style>
+  </head>
+
+  <body style="background: #fff">
+    <script>
+t=0
+draw=_=>{createCanvas(W=600,W)
+t++
+textSize(40)
+textStyle(BOLDITALIC);
+textAlign(C=CENTER,C)
+p=tan(t/40)/8
+w=W/2
+background(p*255)
+fill(255-p*255)
+text([..."#つぶやきProcessing"].map(i=>String.fromCharCode(i.charCodeAt()+min(-4,p*40)+4)).join(""),p*w+w,w)}
+
+    </script>
+
+    
+  </body>
+</html>

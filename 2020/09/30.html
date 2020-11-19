@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+    <meta charset="utf-8" />
+    <style>canvas{
+    }
+      </style>
+  </head>
+
+  <body style="background: #000">
+    <script>
+t=0//#つぶやきProcessing
+setup=_=>createCanvas(W=600,W)
+draw=_=>{t++
+background(w=W/2)
+noStroke(rectMode(RADIUS))
+for(i=15;i--;)for(j=3;j--;){
+T=t+j*20-i
+push(s=(i+3)*10)
+fill(i&1?W:0)
+translate(T*2%W*2-W/2,W-s-abs(sin(T/15)*s*1.6))
+rotate(T/15)
+rect(0,0,s)
+pop()}}
+    </script>
+  </body>
+</html>

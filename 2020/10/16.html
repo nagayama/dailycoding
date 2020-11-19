@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+    <meta charset="utf-8" />
+    <style>canvas{
+    }
+      </style>
+  </head>
+
+  <body style="background: #fff">
+    <script>
+t=0//#つぶやきProcessing
+setup=_=>createCanvas(W=600,W)
+draw=_=>noStroke(background(0))+f(w=W/2,w,sin(t++/9)*20+200,1)
+f=(x,y,n,b)=>{
+push()
+translate(x,y)
+if(n>20)for(let i=5;i--;){s=n+sin(t/9)*30
+f(sin(p=TAU/5*i+(t)/(b?60:-60))*s,cos(p)*s,n/2,b^1)}
+pop(circle(0,0,sin(t/27)*n))}
+    </script>
+  </body>
+</html>
