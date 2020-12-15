@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {}
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+
+    let theShader
+    let pg
+    preload = () => {
+      theShader = loadShader("10.vert", "10.frag")
+    }
+    setup = () => {
+      createCanvas(600, 600, WEBGL)
+      
+      pg = createGraphics(256, 64,"2D")
+      //pg.background(255)
+      pg.textSize(47)
+      pg.background`#fecd1a`
+      pg.textStyle("bold")
+      pg.text("Hello p5.js.",5,49)
+      image(pg,0,0)
+      gl = this._renderer.GL;
+    }
+
+    draw = () => {
+      //gl.enable(gl.BLEND);
+      theShader.setUniform("uTex", pg)
+      theShader.setUniform("uTime", frameCount/100)
+      shader(theShader)
+      background`#fecd1a`
+      orbitControl();
+      rotateY(10)
+      rotateX(10)
+      //texture(pg)
+      //textureWrap(REPEAT)
+      torus(150, 80,128)
+
+    }
+
+  </script>
+
+</body>
+
+</html>

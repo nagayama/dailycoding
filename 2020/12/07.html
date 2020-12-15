@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+
+    let toon
+    preload = () => {
+      toon = loadShader("07.vert", "07.frag")
+    }
+    setup = () => {
+      createCanvas(600, 600, WEBGL)
+      noStroke()
+      shader(toon)
+       gl = this._renderer.GL; // WebGLレンダリングコンテキストを取得
+      gl.enable(gl.CULL_FACE); // カリングを有効にする
+    }
+
+    draw = () => {
+      background`#fecd1a`
+      directionalLight(255, 255, 255, sin(frameCount/30), cos(frameCount/30), -1)
+
+      push()
+      gl.cullFace(gl.FRONT);
+      fill`#ff0ff`
+      translate(cos(frameCount/30)*130, sin(frameCount/30)*130)
+      sphere(100)
+      gl.cullFace(gl.BACK);
+      fill(0)
+      sphere(115)
+
+      pop()
+
+      push()
+      translate(cos(frameCount/30+TAU/3)*130, sin(frameCount/30+TAU/3)*130)
+      gl.cullFace(gl.FRONT);
+      fill`#00ffff`
+      sphere(100)
+      gl.cullFace(gl.BACK);
+      fill(0)
+      sphere(115)
+      pop()
+
+      push()
+      translate(cos(frameCount/30+TAU/3*2)*130, sin(frameCount/30+TAU/3*2)*130)
+      gl.cullFace(gl.FRONT);
+      fill`#ff00ff`
+      sphere(100)
+      gl.cullFace(gl.BACK);
+      fill(0)
+      sphere(115)
+      pop()
+    }
+
+  </script>
+
+</body>
+
+</html>

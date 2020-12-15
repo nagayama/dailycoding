@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+    <script type="module" src="https://unpkg.com/p5.rec"></script>
+  <meta charset="utf-8" />
+</head>
+<body style="background: #fff">
+<script>
+
+
+t=0
+n=80
+setup=_=>{
+createCanvas(W=960,H=540)
+startRecording();
+}
+draw=_=>{
+if(t>120){
+    stopRecording();
+    noLoop()
+}
+noStroke()
+p=color(51,124,198)
+q=color(201,221,238)
+t+=.2
+f=t%120<60
+background(f?p:q)
+for(y=10;y--;)for(x=13;x--;pop()){push(rectMode(CENTER))
+translate(x*n,y*n)
+rotate(t*PI/2/60)
+b=(y+x)%2==0
+fill(b?p:q)
+b?f||rect(0,0,n):f&&rect(0,0,n)}
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

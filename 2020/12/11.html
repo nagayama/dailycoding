@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {}
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+
+    let theShader
+    let pg
+    preload = () => {
+      theShader = loadShader("11.vert", "11.frag")
+    }
+    setup = () => {
+      createCanvas(640, 480, WEBGL)
+      
+      pg = createGraphics(188, 46,"2D")
+      //pg.background(255)
+      pg.textSize(47)
+      pg.background`#fecd1a`
+      pg.textStyle("bold")
+      pg.text("年末進行",0,41)
+      image(pg,0,0)
+      gl = this._renderer.GL;
+      shader(theShader)
+    }
+
+    draw = () => {
+      theShader.setUniform("uTex", pg)
+      theShader.setUniform("uTime", frameCount/100)
+      background`#fecd1a`
+      //orbitControl();
+      //rotateY(10)
+      ///rotateX(frameCount/100)
+      //rotateY(frameCount/100)
+      //texture(pg)
+      //textureWrap(REPEAT)
+      plane(width, height,25)
+
+    }
+
+  </script>
+
+</body>
+
+</html>

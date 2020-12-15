@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+    <meta charset="utf-8" />
+    <style>canvas{
+      outline: red 1px dotted;
+    }
+      </style>
+  </head>
+
+  <body style="background: #fff">
+    <script>
+T=t=0//#つぶやきProcessing
+draw=_=>{t||createCanvas(W=600,W)
+
+background(W)
+noStroke(fill(0))
+t+=.02
+p=PI/2
+
+
+T=sin(t)*PI/2+PI/2
+S=cos(t)*PI/2+PI/2
+d=0
+j=0
+for(y=5;y--;)for(x=5;x--;d=0)for(i=1;i<5;i++){
+d+=(i*p)%TAU-p
+arc(((i+1)%2+1)*60-30+x*120,int((i+1)/2)*60-30+y*120,60,60,d+p+T,d+p*3+p+TAU+T)
+}
+
+rectMode(CENTER)
+
+if(t%TAU > PI){
+for(y=5;y--;)for(x=5;x--;){
+fill("blue")
+push()
+translate(120*x+60,120*y+60)
+scale(sin(t))
+rotate(-T)
+rect(0,0,60)
+pop()
+}
+
+}else{
+fill("red")
+for(y=6;y--;)for(x=6;x--;){
+push()
+translate(120*x,120*y)
+scale(sin(t))
+rotate(-T)
+rect(0,0,60)
+pop()
+
+}
+
+}
+
+
+}
+</script>
+    
+  </body>
+</html>
