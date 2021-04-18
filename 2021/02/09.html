@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+t=0//#つぶやきprocessing
+setup=_=>createCanvas(W=600,W)
+draw=_=>{background(W)
+t+=.05
+w=W/2
+noFill(strokeWeight(3))
+u=60
+p=PI/2
+for(y=W;y-=u;)for(x=W;x-=u;arc(x,y,s,s,q=sin(d+t)*TAU,q+p+p))s=u*sin(t+(d=dist(w,w,x,y)/w))}
+  </script>
+
+</body>
+
+</html>

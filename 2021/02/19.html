@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+setup=_=>{createCanvas(W=600,W)
+d=drawingContext
+noStroke`#つぶやきProcessing`
+push(w=W/2)
+stroke(0,9)
+d.shadowOffsetX=d.shadowBlur=d.shadowOffsetY=30
+d.shadowColor="#0004"
+pop(rect(x=185,w/2,t=230,w,3))
+textSize(30)
+textStyle(BOLD)
+text("#PCD2021",t,t)
+fill(0,9)
+rect(x,w/2,9,w)}
+
+
+  </script>
+
+</body>
+</html>

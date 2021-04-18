@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+t=0
+draw=_=>{t++||createCanvas(W=600,W)
+background(W)
+textAlign(c=CENTER,c)
+textFont('monospace',14)
+for(y=51;y--;)for(x=51;x--;)text(`#つぶやきProcessing`[0|(abs(x-20)+abs(y-20)+t/4)%17],x*15,y*15)}
+</script>
+
+</body>
+</html>

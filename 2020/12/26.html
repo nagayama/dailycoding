@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+
+      
+setup=_=>{createCanvas(W=600,W)
+background(W)
+fill(0)
+textAlign(C=CENTER,C)
+textStyle(BOLD)
+textSize(60)
+text("#つぶやきProcessing",w=W/2,w)
+for(y=W;y--;)for(x=W;x--;)randomGaussian(x+y,w*.4)<W&&stroke(get(x,y)[0]==0?W:0),point(x, y)}
+
+  </script>
+
+</body>
+
+</html>

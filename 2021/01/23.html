@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+t=0
+draw=_=>{
+createCanvas(W=600,W)
+t+=.01
+w=W/2
+textStyle(BOLD)
+for(q=2;q++<8;)for(j=i=int(80-q*10);i--;){textSize(q*7)
+p=sin(q+t)*4+TAU/j*i
+push(m=400-q*40)
+translate(x=sin(p)*m+w,y=cos(p)*m+w)
+rotate(atan2(w-y,w-x))
+pop(text("確定申告#つぶやきProcessing"[i%4],0,0))}}
+  </script>
+
+</body>
+
+</html>

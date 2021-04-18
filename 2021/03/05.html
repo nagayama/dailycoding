@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+  t = 0
+    draw = _ => {
+      t || createCanvas(W = 600, W)
+      t += .02
+      background(0)
+      fill(W)
+      textAlign(c = CENTER, c)
+      for (y = 51; y--;)for (x = 51; x--; text(`そほて、 mm so p Zölle PP Rex c n@lh`[0 | a(p) % 33], x * 15, y * 15)) {
+        a = abs
+        p = (x - 20)
+        q = (y - 20)
+        c = cos(t)
+        s = sin(t)
+        p = a(p * c - q * s) * c + a(p * s + q * c) * c
+      }
+    }
+</script>
+
+</body>
+</html>

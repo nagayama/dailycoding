@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+t=0
+draw=_=>{t++||createCanvas(W=600,W)
+background(0)
+w=W/2
+with(g=createGraphics(W,W)){textAlign(c=CENTER,c)
+textStyle(BOLD)
+textSize(w)
+fill(1)
+text('#つぶやきProcessing'[(t-15)/30%15|0],w,w)}
+for(y=W;y-=10;)for(x=W;x-=10;g.get(x,y)[0]&&circle(tan(t*PI/30)*20+x,y,7))fill(W)}
+  </script>
+
+</body>
+
+</html>

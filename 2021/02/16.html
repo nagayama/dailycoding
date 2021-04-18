@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+setup=_=>{createCanvas(W=1024,u=W/2)
+background(i=0)
+w=W/4
+fill(1)
+strokeWeight(.1)
+textStyle(BOLD)
+textSize(200)
+text("#PCD2020",9,w+75)
+g=randomGaussian
+stroke`#つぶやきProcessing`
+while(i<2e3)if(get(x=g(u,w),y=g(w,30))[0]==1)for(i++,j=20;j--;)line(g(x,3),g(y,3),g(x,6),g(y,6))}
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+t=0
+draw=_=>{
+createCanvas(W=600,W)
+t+=.1
+textSize(40)
+for(j=4;j--;)for(y=w=W/2,x=w*3,i=63;i--;pop(text("HAPPY NEW YEAR 2021!"[i%21],0,0))){I=(t+i)/2
+p=noise(I/9,j)*TAU+TAU*i*45
+X=x
+Y=y
+line(X,Y,x+=cos(p)*30,y+=sin(p)*30)
+push(r=atan2(Y-y,X-x))
+translate(x,y)
+rotate(r)}}
+  </script>
+
+</body>
+
+</html>

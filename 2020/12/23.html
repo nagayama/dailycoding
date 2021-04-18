@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+
+      
+t=0
+setup=_=>createCanvas(W=600, W)
+draw=_=>{background(0)
+stroke`#つぶやきProcessing`
+w=W/2
+for(t++,i=2e4;i--;point(cos(x+sin(q=sin(t/20))*PI)*y+w,sin(x+sin(q)*PI)*y+w))
+x=randomGaussian(0,sin(t/20)),y=randomGaussian(120,sin(t/20)*6+9)}
+x=randomGaussian(0,sin(t/20)),y=randomGaussian(120,sin(t/20)*6+9)}
+
+  </script>
+
+</body>
+
+</html>

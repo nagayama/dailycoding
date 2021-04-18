@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+s='Ñ@#W$9876543210?!abc;:+=-,._ #つぶやきProcessing'
+setup=_=>createCanvas(t=W=600,W)
+draw=_=>{background(W)
+t+=.4
+textFont("monospace",18)
+for(y=41;y--;)for(x=41;x--;)text(s[int(y%2?y+x+t:y-x+t)%29],x*15,y*15)}
+//ref:https://play.ertdfgcvb.xyz/
+</script>
+
+</body>
+</html>

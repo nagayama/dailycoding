@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+t=0
+draw=_=>{t||createCanvas(W=600,W)
+background`#70ACBF`
+noStroke(w=W/2)
+t+=1e-3
+n=noise
+rectMode(CENTER)
+for(j=20;j--;)for(c=2;c--;)for(i=4;i--;m=n(i,j),rect(sin(t+j/2)*w+w+(c?9:0)+sin(m)*40,15*i+n(j)*W+(c?9:0),m*60+30*(i+1),20,40))fill(c?[0,20]:`#つぶやきprocessing #PCD2021`)}
+  </script>
+</body>
+
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+t=0
+setup=_=>createCanvas(W=600,W,WEBGL)
+draw=_=>{
+background`#つぶやきProcessing`
+t++
+w=W/2
+R=rotateY
+T=translate
+T(0,-w)
+R(t/30)
+for(i=w;i--;){
+push()
+R(sin(PI/30))
+p=i/9
+T(cos(p)*i,i*3,sin(p)*i)
+pop(sphere(map(i,0,w,6,100)))}}
+  </script>
+
+</body>
+
+</html>

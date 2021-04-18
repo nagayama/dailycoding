@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+
+      
+t=600
+V=[]
+setup=_=>{
+c=createCanvas(W=600,W)
+w=W/2
+with(g=createGraphics(W,W)){fill`red`
+textSize(99)
+text("#p5holiday",w-230,w)}}
+draw=_=>{t++
+background(0)
+for(m=i=999;i--;){x=noise(1/W,i)*10
+X=noise(t/W,i)
+circle(q=cos(x+X)*w+w,r=((t+i)*(i*.003))%W,map(i,0,m,1,6))
+with(g){if(get(q,r)[0]==255){stroke(W)
+if(!V[i]||V[i]>r)circle(q,V[i]=r,1)}}}image(g,0,0)}
+
+  </script>
+
+</body>
+
+</html>

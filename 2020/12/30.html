@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+t=0//#つぶやきprocessing
+setup=_=>createCanvas(W=600,W)
+draw=_=>{background(0)
+t+=.5
+w=W/2
+for(y=W;y-=20;)for(x=W;x-=20;circle(sin(p=t/10+d**3)*10+x,cos(p)*10+y,7))d=dist(w,w,x,y)/w+PI/2}
+  </script>
+
+</body>
+
+</html>

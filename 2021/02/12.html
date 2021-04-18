@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+t=0
+setup=_=>createCanvas(W=600,W)
+draw=_=>{background`#つぶやきprocessing #PCD2021`
+noFill(w=W/2)
+t+=.05
+for(i=0;i<w;i++){beginShape(stroke(0,map(sin(i),0,1,120,180),0,150))
+for(j=-1;j<8;j++)curveVertex(sin(i+j+t)*30+W/w*i,W-(W-noise(i/2+t/5)*w)/8*j)
+endShape(strokeWeight(2))}}
+  </script>
+
+</body>
+
+</html>

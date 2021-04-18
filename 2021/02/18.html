@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+t=0
+draw=_=>{t||createCanvas(W=600,W)
+background("#002")
+t++
+r=_=>random(0,W)
+c=circle
+for(i=1e3;i--;)c(r(noStroke(w=W/2)),r(colorMode(HSB,8,W,W)),r`#PCD2021`/w)
+c(w,w,150)
+drawingContext.clip()
+for(y=w/2;y--;)for(x=w/2;x--;rect(x*4,y*4,4))fill(5,noise(x/60+t/50,y/30)*W*2,W)}
+  </script>
+
+</body>
+</html>

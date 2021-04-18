@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+t=0
+setup=_=>createCanvas(W=600,W)
+draw=_=>{noStroke(background(0))
+t+=.02//#つぶやきProcessing
+w=W/2
+for(y=W;y-=10;)for(x=W;x-=10;circle(sin(p)*10+x,cos(p)*10+y,4))
+for(p=t,i=6;i--;)v=sin(t)*w,p+=atan2(x-w+sin(q=t+TAU/6*i)*v,y-w+cos(q)*v)}
+
+
+  </script>
+
+</body>
+</html>

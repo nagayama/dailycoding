@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+t=0
+setup=_=>createCanvas(W=600,W)
+draw=_=>{background`#つぶやきprocessing #PCD2021`
+noFill(w=W/2)
+t+=.3
+for(i=0;i<W;i++){beginShape(stroke(0,120+sin(i)*40,0,150))
+for(x=i,y=w,j=0;j<20;j++){vertex(x,y)
+x+=cos(d=noise((t+j*3)/30,i/2e1)*9)*9
+y+=sin(d)*9}
+endShape()}}
+  </script>
+</body>
+
+</html>

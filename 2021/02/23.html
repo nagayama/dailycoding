@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+setup=_=>createCanvas(t=W=600,W)
+draw=_=>{background`#つぶやきProcessing`
+t++
+textFont("monospace",15)
+for(y=51;y--;)for(x=51;x--;text(char(9600+p%40),x*15,y*15)){
+X=sin(s=t/19)*9+x
+Y=cos(s)*9+y
+p=dist(X,Y,20,20)+t}}
+</script>
+
+</body>
+</html>

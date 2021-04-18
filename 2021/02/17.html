@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+setup=_=>{createCanvas(W=600,W)
+blendMode(BURN)
+background("#edc9af")
+r=_=>random(0,W)
+stroke(245)
+for(i=W*2;i--;)circle(r(n=noise),r(w=W/2),r`#つぶやきprocessing #PCD2021`)
+fill(210)
+for(i=6;i--;bezier(-w,W,n(p=i)*W,n(p*2)*w+w,n(p)*W,n(p*2)*w+w,W+w,W))circle(n(1)*W,n(1)*w,160)}
+  </script>
+
+</body>
+</html>

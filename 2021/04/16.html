@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+t=0
+draw=_=>{t||createCanvas(W=600,W)
+t+=.2
+background(0)
+fill(W)
+textAlign(c=CENTER,c)
+for(y=51;y--;)for(x=51;x--;text(`.#つぶやきProcessing`[0|abs(p)%20],x*15,y*15)){
+d=dist(0,0,x%10-5,y%10-5)
+p=cos(t/3)*d*3+x+y}}
+</script>
+
+</body>
+</html>

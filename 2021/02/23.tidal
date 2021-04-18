@@ -1,0 +1,62 @@
+setcps(1)
+
+hush
+
+d1 $ sound "hh*8" #gain "0.1 1 0.3 0.4 1 0.6 0.7 0.8" #vowel "<a p>" #lpf 3000
+
+d1 silence
+
+d2 $ sound "~ ~ sd [~ sd] ~ ~ [~ sd] ~" #gain 1 #vowel "<e i o a>" #lpf 1000
+
+d2 silence
+
+d3 $ sound "bd(4,8)" #gain "1 0.3 0.9 0.3 1 0.2 1 0.5"
+
+d3 silence
+
+d4 $ jux rev $ s "numbers:1 numbers:2"
+    # begin 0.12
+    # end 0.22
+    # speed 1.4
+    # gain "0.9 0.8"
+    # hpf 200
+
+d4 silence
+
+
+d1 $ swing 1 $ s "808:5(8,8)" #vowel "a i u e"
+
+d2 $ s "cp(3,8)" #vowel "a i u e"
+
+d4 $ swing 1 $ s "hh(2,8)" 
+
+d5 $ s "gabba:5(4,8)"
+ 
+d6 $ s "sn:4(5,16)" #gain "0.7 0.6"
+
+d6 silence
+
+hush
+
+
+d1 $ s "[909:4 hh] [hh 909:4] [~ 909:4] 909:4"
+
+d2 $ s "~ cp:3 ~ cp:3"# gain 0.8 #delay 2 #delaytime 2.25 # up "4 2 0 6"
+
+d2 $ s "hh 808:2 hh drum hh 808:2 hh hh" --# gain 0.8 #delay 2 #delaytime 2.25 # up "4 2 0 6"
+
+d4 $ s "bass2:1  bass2:1" #gain 0.6
+
+d4 silence
+
+d5 $ s "numbers:1 ~ numbers:2 ~"  #begin 0.1 # end 0.22 # speed 1.4
+
+d6 $ up "<-2 3 -6 4>" # s "808:2 ~ ~ [808:2]"
+
+d1 silence
+d2 silence
+d3 silence
+d4 silence
+d5 silence
+d6 silence
+hush

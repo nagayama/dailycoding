@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    canvas {
+      outline: red 1px dotted;
+    }
+  </style>
+</head>
+
+<body style="background: #fff">
+  <script>
+t=0
+draw=_=>{t||createCanvas(W=600,W)
+t+=.01
+background(0)
+fill(W)
+textAlign(c=CENTER,c)
+for(y=51;y--;)for(x=51;x--;)text(`.#つぶやきProcessing`[0|abs(sin(atan2(x-20,y-20)*2+t)*19)%18],x*15,y*15)}
+</script>
+
+</body>
+</html>
